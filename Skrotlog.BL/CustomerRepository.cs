@@ -15,6 +15,7 @@ namespace Skrotlog.BL
         public void AddCustomer(Customer c)
         {
             listOfCustomers.Add(c);
+
         }
     }
 }
