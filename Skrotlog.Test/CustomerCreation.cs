@@ -20,8 +20,9 @@ namespace Skrotlog.Test
         public void CustomerCreation_AddCustomer_NewCustomer()
         {
             Customer testCustomer = new Customer("TestCompany", "Denmark");
-            cr.AddCustomer(testCustomer);
 
+            Assert.AreEqual(0, cr.Count);
+            cr.AddCustomer(testCustomer);
             Assert.AreEqual(1, cr.Count);
 
         }
