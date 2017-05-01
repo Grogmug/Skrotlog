@@ -4,9 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Skrotlog.UI"
+        xmlns:view="clr-namespace:Skrotlog.UI.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <TabControl>
+            <TabItem Header="Kontrakter">
+
+            </TabItem>
+            <TabItem Header="Opret kontrakt">
+
+            </TabItem>
+            <TabItem Header="Opret kunde">
+
+            </TabItem>
+            <TabItem Header="Indstillinger">
+
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
