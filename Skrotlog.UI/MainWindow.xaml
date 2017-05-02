@@ -6,17 +6,17 @@
         xmlns:local="clr-namespace:Skrotlog.UI"
         xmlns:view="clr-namespace:Skrotlog.UI.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="SkrotLog" Height="600" Width="800">
     <Grid>
         <TabControl>
             <TabItem Header="Kontrakter">
-
+                <view:ContractView />
             </TabItem>
             <TabItem Header="Opret kontrakt">
-
+                <view:CreateContractView />
             </TabItem>
             <TabItem Header="Opret kunde">
-
+                <view:CreateCustomerView />
             </TabItem>
             <TabItem Header="Indstillinger">
 

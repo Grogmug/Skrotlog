@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Skrotlog.DAL
+namespace Skrotlog.UI.ViewModel
 {
-    public class Class1
+    class CreateCustomerViewModel
     {
     }
 }
