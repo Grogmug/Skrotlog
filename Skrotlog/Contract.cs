@@ -6,20 +6,28 @@ using System.Threading.Tasks;
 
 namespace Skrotlog.Domain
 {
-    enum Currency { DKK, EUR };
+    public enum Currency { DKK, EUR };
     public class Contract
     {
 
-        Customer Customer { get; set; }
-        decimal Price { get; set; }
-        Material Material { get; set; }
-        int ExportAmount { get; set; }
-        int DeliverAmount { get; set; }
-        int RemainingAmount { get; set; }
-        bool Active { get; set; }
-        DateTime Date { get; set; }
-        Currency Currency { get; set; }
-        string Initials { get; set; }
+        public Customer Customer { get; set; }
+        public decimal Price { get; set; }
+        public List<Material> Material { get; set; }
+        public int TotalAmount { get; set; }
+        public int DeliveredAmount { get; set; }
+        public int RemainingAmount { get; set; }
+        public bool Active { get; set; }
+        public DateTime Date { get; set; }
+        public Currency Currency { get; set; }
+        public string Initials { get; set; }
 
+        public Contract(Customer c, decimal price, List<Material> material, int totalAmount, DateTime date, Currency currency, string initials)
+        {
+            Customer = c;
+            Price = price;
+            Material = material;
+            TotalAmount = totalAmount;
+            Date = date;
+        }
     }
 }

@@ -8,8 +8,13 @@ namespace Skrotlog.Domain
 {
     public class Material
     {
-        string Type { get; set; }
-        string Designation { get; set; }
+        public string Type { get; set; }
+        public string Designation { get; set; }
 
+        public Material(string type, string designation)
+        {
+            Type = type;
+            Designation = designation;
+        }
     }
 }
