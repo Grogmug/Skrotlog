@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using Skrotlog.BL;
+using Skrotlog.Domain;
 
 namespace Skrotlog.UI.ViewModel
 {
-    public class CreateCustomerViewModel
+    public class CreateCustomerViewModel : INotifyPropertyChanged
     {
         string name = "";
         string country = "";
@@ -45,17 +48,26 @@ namespace Skrotlog.UI.ViewModel
 
         public void ExecuteCreate()
         {
+            Customer customer = new Customer(Name, Country);
+            BLFacade.Instance.AddCustomer(customer);
+
             Name = "";
-            Country = "test";
+            Country = "";
+            RaisePropertyChanged("Name");
+            RaisePropertyChanged("Country");
         }
 
         public bool CanCreate()
         {
-            if (Name != "")
-            {
-                return true;
-            }
-            return false;
+            return Name != "" && Country != "";
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
     }
 }

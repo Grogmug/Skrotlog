@@ -120,7 +120,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Skrotlog.BL\Skrotlog.BL.csproj">
+      <Project>{fe2d188e-d17f-4ec3-899d-05f665bcada0}</Project>
+      <Name>Skrotlog.BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Skrotlog\Skrotlog.Domain.csproj">
+      <Project>{94d80377-9ded-46da-b274-77a5174a4ad4}</Project>
+      <Name>Skrotlog.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

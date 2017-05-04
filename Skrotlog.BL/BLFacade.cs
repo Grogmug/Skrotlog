@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Skrotlog.Domain;
 
 namespace Skrotlog.BL
 {
     public class BLFacade
     {
+        #region Singleton Region
         private static volatile BLFacade instance;
 
         public static BLFacade Instance
@@ -21,6 +23,41 @@ namespace Skrotlog.BL
                 }
                 return instance;
             }
+        }
+        #endregion
+
+        CustomerRepository customerRepository;
+
+        private BLFacade()
+        {
+            customerRepository = new CustomerRepository();
+
+            // TEST DATA
+            AddCustomer(new Customer("STENA", "Denmark"));
+            AddCustomer(new Customer("Esbjerg", "Denmark"));
+            AddCustomer(new Customer("Reukema", "Denmark"));
+            AddCustomer(new Customer("Oryx", "Denmark"));
+        }
+
+        public void AddCustomer(Customer c)
+        {
+            customerRepository.AddCustomer(c);
+        }
+
+        public List<Customer> GetCustomers()
+        {
+            return customerRepository.Customers;
+        }
+
+        public List<Material> GetMaterials()
+        {
+            //Test data
+            List<Material> materials = new List<Material>();
+            materials.Add(new Material("Aluminium", "A"));
+            materials.Add(new Material("Jern", "E1"));
+            materials.Add(new Material("Kobber", "K"));
+            materials.Add(new Material("Messing", "M"));
+            return materials.OrderBy(x => x.Type).ToList(); 
         }
     }
 }

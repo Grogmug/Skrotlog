@@ -9,21 +9,26 @@ namespace Skrotlog.BL
 {
     public class CustomerRepository
     {
-        //fields
-        private List<Customer> listOfCustomers;        
-        //Properties
+        private List<Customer> listOfCustomers;
+
         public int Count { get { return listOfCustomers.Count; } }
+
+        public List<Customer> Customers
+        {
+            get
+            {
+                return listOfCustomers.OrderBy(x => x.Name).ToList();
+            }
+        }
 
         public CustomerRepository()
         {
             listOfCustomers = new List<Customer>(); 
         }
 
-        //Methods
         public void AddCustomer(Customer c)
         {
             listOfCustomers.Add(c);
-
         }
     }
 }

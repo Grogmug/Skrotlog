@@ -9,43 +9,30 @@
     <Grid>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Width="246" Orientation="Vertical" Margin="30,30,0,0">
 
-            <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" SelectedIndex="0" Margin="10,10,0,0">
-                <ComboBoxItem Content="Esbjerg"/>
-                <ComboBoxItem Content="Oryx"/>
-                <ComboBoxItem Content="Reukema"/>
-                <ComboBoxItem Content="STENA"/>
-            </ComboBox>
+            <ComboBox ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}" DisplayMemberPath="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="10,10,0,0"/>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,25,0,0">
                 <Label Content="Mængde:"/>
-                <TextBox HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="80" Margin="0,2,0,0"/>
+                <TextBox Text="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="80" Margin="0,2,0,0"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,25,0,0">
                 <Label Content="Pris:"/>
-                <TextBox HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="80" Margin="30,2,0,0"/>
-                <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" SelectedIndex="0" Margin="10,2,0,0">
-                    <ComboBoxItem Content="DKK"/>
-                    <ComboBoxItem Content="EUR"/>
-                </ComboBox>
+                <TextBox Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="80" Margin="30,2,0,0"/>
+                <ComboBox ItemsSource="{Binding Currencies}" SelectedItem="{Binding SelectedCurrency}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" SelectedIndex="0" Margin="10,2,0,0"/>
             </StackPanel>
 
-            <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="22" Content="Gem" Margin="10,120,0,0"/>
+            <Button Command="{Binding CreateCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="22" Content="Gem" Margin="10,120,0,0"/>
 
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Margin="276,30,-30,0" VerticalAlignment="Top" Width="254">
-            <ComboBox Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" SelectedIndex="0">
-                <ComboBoxItem Content="Aluminium"/>
-                <ComboBoxItem Content="Jern"/>
-                <ComboBoxItem Content="Kobber"/>
-                <ComboBoxItem Content="Messing"/>
-            </ComboBox>
-            <ComboBox Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" SelectedIndex="0">
-                <ComboBoxItem Content="Aluminium"/>
-                <ComboBoxItem Content="Jern"/>
-                <ComboBoxItem Content="Kobber"/>
-                <ComboBoxItem Content="Messing"/>
-            </ComboBox>
+            <StackPanel Orientation="Horizontal">
+                <ComboBox ItemsSource="{Binding Materials}" SelectedItem="{Binding SelectedMaterial}" DisplayMemberPath="Type" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" SelectedIndex="0"/>
+                <Button Command="{Binding AddCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="22" Content="Tilføj" Margin="10,10,0,0"/>
+                <Button Command="{Binding ClearCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="22" Content="Ryd" Margin="10,10,0,0"/>
+            </StackPanel>
+            <Label Content="Materialer:" Margin="6,10,0,0"/>
+            <TextBlock Text="{Binding MaterialListDescription}" Margin="12,0,0,0"/>
         </StackPanel>
     </Grid>
 </UserControl>
