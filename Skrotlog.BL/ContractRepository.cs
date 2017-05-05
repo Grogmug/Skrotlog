@@ -11,7 +11,14 @@ namespace Skrotlog.BL
     {
         private List<Contract> listOfContracts;
 
-        public int Count { get { return listOfContracts.Count; } }
+        public int Count
+        {
+            get { return listOfContracts.Count; }
+        }
+        public List<Contract> Contracts
+        {
+            get { return listOfContracts; }
+        }
 
         public ContractRepository()
         {
@@ -21,5 +28,6 @@ namespace Skrotlog.BL
         {
             listOfContracts.Add(c);
         }
+
     }
 }

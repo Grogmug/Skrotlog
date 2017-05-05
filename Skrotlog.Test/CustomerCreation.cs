@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Skrotlog.Domain;
 using Skrotlog.BL;
+using System.Linq;
 
 namespace Skrotlog.Test
 {
@@ -21,10 +22,12 @@ namespace Skrotlog.Test
         {
             Customer testCustomer = new Customer("TestCompany", "Denmark");
 
-            Assert.AreEqual(0, cr.Count);
             cr.AddCustomer(testCustomer);
-            Assert.AreEqual(1, cr.Count);
+            Customer actual = cr.Customers.First();
 
+            Assert.AreEqual(1, cr.Count);
+            Assert.AreEqual("TestCompany", actual.Name);
+            Assert.AreEqual("Denmark", actual.Country);
         }
     }
 }

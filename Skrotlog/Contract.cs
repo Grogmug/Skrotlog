@@ -28,6 +28,7 @@ namespace Skrotlog.Domain
             Material = material;
             TotalAmount = totalAmount;
             Date = date;
+            Initials = initials;
         }
     }
 }

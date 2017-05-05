@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Skrotlog.Domain;
 using Skrotlog.BL;
+using System.Linq;
 
 namespace Skrotlog.Test
 {
@@ -26,7 +27,14 @@ namespace Skrotlog.Test
             Contract testContract = new Contract(testCustomer,20000,testList, 100, new DateTime(2017,1,1), 0, "SH") ;
 
             cr.AddContract(testContract);
+            Contract actual = cr.Contracts.First();
+
             Assert.AreEqual(1, cr.Count);
+            Assert.AreEqual("TestCompany", actual.Customer.Name);
+            Assert.AreEqual(2017, actual.Date.Year);
+            Assert.AreEqual(1, actual.Date.Month);
+            Assert.AreEqual(1, actual.Date.Day);
+            Assert.AreEqual("SH", actual.Initials);
         }
     }
 }
