@@ -31,12 +31,6 @@ namespace Skrotlog.BL
         private BLFacade()
         {
             customerRepository = new CustomerRepository();
-
-            // TEST DATA
-            AddCustomer(new Customer("STENA", "Denmark"));
-            AddCustomer(new Customer("Esbjerg", "Denmark"));
-            AddCustomer(new Customer("Reukema", "Denmark"));
-            AddCustomer(new Customer("Oryx", "Denmark"));
         }
 
         public void AddCustomer(Customer c)

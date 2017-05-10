@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Skrotlog.UI.ViewModel;
 
 namespace Skrotlog.UI.View
 {
@@ -23,6 +24,7 @@ namespace Skrotlog.UI.View
         public ContractView()
         {
             InitializeComponent();
+            DataContext = new ContractViewModel();
         }
     }
 }

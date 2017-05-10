@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Skrotlog.Domain;
+using Skrotlog.DAL;
 
 namespace Skrotlog.BL
 {
@@ -11,7 +12,10 @@ namespace Skrotlog.BL
     {
         private List<Customer> listOfCustomers;
 
-        public int Count { get { return listOfCustomers.Count; } }
+        public int Count
+        {
+            get { return listOfCustomers.Count; }
+        }
 
         public List<Customer> Customers
         {
@@ -23,7 +27,8 @@ namespace Skrotlog.BL
 
         public CustomerRepository()
         {
-            listOfCustomers = new List<Customer>(); 
+            listOfCustomers = new List<Customer>();
+            listOfCustomers = DALFacade.Instance.GetCustomers();
         }
 
         public void AddCustomer(Customer c)

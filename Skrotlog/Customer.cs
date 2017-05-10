@@ -16,5 +16,10 @@ namespace Skrotlog.Domain
             Name = name;
             Country = country;
         }
+
+        public Customer()
+        {
+
+        }
     }
 }
