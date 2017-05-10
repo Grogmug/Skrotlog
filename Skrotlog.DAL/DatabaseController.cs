@@ -75,7 +75,9 @@ namespace Skrotlog.DAL
 
                 while (reader.Read())
                 {
-                    return new Customer(reader["CustomerName"].ToString(), reader["Country"].ToString());
+                    string name = reader["CustomerName"].ToString();
+                    string country = reader["Country"].ToString();
+                    return new Customer(name, country);
                 }
             }
 
@@ -96,6 +98,7 @@ namespace Skrotlog.DAL
 
                 while (reader.Read())
                 {
+
                 }
             }
 
@@ -113,7 +116,7 @@ namespace Skrotlog.DAL
 
             using(MySqlConnection con = new MySqlConnection(connectionString.ToString()))
             {
-                string query = "";
+                string query = "SELECT MaterialId, Price, TotalAmount, DeliveredAmount, LineComment, Active FROM ContractLine WHERE ContractLineId=" + id;
                 MySqlCommand cmd = new MySqlCommand(query, con);
 
                 con.Open();
@@ -121,10 +124,37 @@ namespace Skrotlog.DAL
 
                 while (reader.Read())
                 {
+                    int materialId = int.Parse(reader["MaterialId"].ToString());
+                    Material m = GetMaterial(materialId);
+                    decimal price = decimal.Parse(reader["Price"].ToString());
+                    int amount = int.Parse(reader["Amount"].ToString());
+                    int delivered = int.Parse(reader["DeliveredAmount"].ToString());
+
+                    ContractLine c = new ContractLine(m, price, amount, delivered);
+                    contractLines.Add(c);
                 }
             }
 
             return contractLines;
+        }
+
+        private Material GetMaterial(int id)
+        {
+            using (MySqlConnection con = new MySqlConnection(connectionString.ToString()))
+            {
+                string query = "SELECT MaterialType, Designation FROM Material WHERE MaterialId=" + id;
+                MySqlCommand cmd = new MySqlCommand(query, con);
+
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    return new Material(reader["MaterialType"].ToString(), reader["Designation"].ToString());
+                }
+            }
+
+            return null;
         }
     }
 }

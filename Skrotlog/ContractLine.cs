@@ -25,5 +25,10 @@ namespace Skrotlog.Domain
             Price = price;
             TotalAmount = amount;
         }
+        public ContractLine(Material material, decimal price, int amount, int delivered)
+            :this(material, price, amount)
+        {
+            DeliveredAmount = delivered;
+        }
     }
 }
