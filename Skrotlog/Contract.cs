@@ -23,6 +23,7 @@ namespace Skrotlog.Domain
             Date = date;
             Initials = initials;
             Currency = currency;
+            ContractLines = new List<ContractLine>();
         }
     }
 }

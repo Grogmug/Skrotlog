@@ -9,9 +9,10 @@ namespace Skrotlog.BL
 {
     public class BLFacade
     {
+        private CustomerRepository customerRepository;
         #region Singleton Region
         private static volatile BLFacade instance;
-
+        
         public static BLFacade Instance
         {
             get
@@ -26,7 +27,7 @@ namespace Skrotlog.BL
         }
         #endregion
 
-        CustomerRepository customerRepository;
+        
 
         private BLFacade()
         {
@@ -36,6 +37,11 @@ namespace Skrotlog.BL
         public void AddCustomer(Customer c)
         {
             customerRepository.AddCustomer(c);
+        }
+
+        public void AddCustomer(string name, string country)
+        {
+            customerRepository.AddCustomer(name, country);
         }
 
         public List<Customer> GetCustomers()

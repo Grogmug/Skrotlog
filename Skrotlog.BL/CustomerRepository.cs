@@ -35,5 +35,10 @@ namespace Skrotlog.BL
         {
             listOfCustomers.Add(c);
         }
+
+        public  void AddCustomer(string name, string country)
+        {
+            listOfCustomers.Add(new Customer(name, country));
+        }
     }
 }
