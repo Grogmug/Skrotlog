@@ -48,8 +48,10 @@ namespace Skrotlog.UI.ViewModel
 
         public void ExecuteCreate()
         {
-            Customer customer = new Customer(Name, Country);
-            BLFacade.Instance.AddCustomer(customer);
+            //Customer customer = new Customer(Name, Country);
+            //BLFacade.Instance.AddCustomer(customer);
+
+            BLFacade.Instance.AddCustomer(Name, Country);
 
             Name = "";
             Country = "";

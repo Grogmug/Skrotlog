@@ -39,6 +39,11 @@ namespace Skrotlog.BL
             customerRepository.AddCustomer(c);
         }
 
+        public void AddCustomer(string name, string country)
+        {
+            customerRepository.AddCustomer(name, country);
+        }
+
         public List<Customer> GetCustomers()
         {
             return customerRepository.Customers;
