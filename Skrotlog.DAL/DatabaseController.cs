@@ -87,10 +87,10 @@ namespace Skrotlog.DAL
         public List<Contract> GetContracts()
         {
             List<Contract> contracts = new List<Contract>();
-
+        
             using (MySqlConnection con = new MySqlConnection(connectionString.ToString()))
             {
-                string query = "";
+                string query = "SELECT ContractId, CustomerId, CreationDate, Currency, Initials, Active FROM Contract";
                 MySqlCommand cmd = new MySqlCommand(query, con);
 
                 con.Open();
@@ -98,7 +98,17 @@ namespace Skrotlog.DAL
 
                 while (reader.Read())
                 {
+                    int contractId = int.Parse(reader["ContractId"].ToString());
+                    int customerId = int.Parse(reader["CustomerId"].ToString());
+                    Customer customer = GetCustomer(customerId);
+                    DateTime date = DateTime.Parse(reader["CreationDate"].ToString());
+                    string currencyString = reader["Currency"].ToString();
+                    Currency currency = (Currency)Enum.Parse(typeof(Currency), currencyString);
+                    string initials = reader["Initials"].ToString();
+                    Contract contract = new Contract(customer, date, currency, initials);
+                    contract.Id = contractId;
 
+                    contract.ContractLines = GetContractLines(contractId);
                 }
             }
 
