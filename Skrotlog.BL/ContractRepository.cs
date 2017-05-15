@@ -24,8 +24,9 @@ namespace Skrotlog.BL
         {
             listOfContracts = new List<Contract>();
         }
-        public void AddContract(Contract c)
+        public void AddContract(Customer cust, DateTime date, Currency currency, string initials)
         {
+            Contract c = new Contract(cust, date, currency, initials);
             listOfContracts.Add(c);
         }
 
