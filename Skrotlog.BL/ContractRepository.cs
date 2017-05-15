@@ -31,7 +31,13 @@ namespace Skrotlog.BL
 
         public void AddAmount(int contractId, Material material, int amount)
         {
-            listOfContracts.Find(x => x.Id == contractId).ContractLines.Find(x => x.Material.Type == material.Type).DeliveredAmount += amount;
+            //listOfContracts.Find(x => x.Id == contractId).ContractLines.Find(x => x.Material.Type == material.Type).DeliveredAmount += amount;
+
+            Contract selectedContract = listOfContracts.Find(x => x.Id == contractId);
+
+            ContractLine selectedContractLine = selectedContract.ContractLines.Find(x => x.Material.Type.Equals(material.Type));
+
+            selectedContractLine.DeliveredAmount += amount;
         }
     }
 }
