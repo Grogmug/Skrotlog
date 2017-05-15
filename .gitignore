@@ -11,7 +11,7 @@
 *.userprefs
 
 # Ignore DbController
-Skrotlog.DAL/DatabaseController.cs
+/Skrotlog.DAL/DatabaseController.cs
 
 # Build results
 [Dd]ebug/

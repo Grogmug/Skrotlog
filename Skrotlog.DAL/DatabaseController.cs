@@ -11,7 +11,7 @@ namespace Skrotlog.DAL
 {
     public class DatabaseController
     {
-        //elkddl kjghsl fkjghdj shf dshfjgd shk
+        // SHOULD NOT BE COMMITTED
         MySqlConnectionStringBuilder connectionString;
 
         public DatabaseController()
