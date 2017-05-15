@@ -26,12 +26,13 @@ namespace Skrotlog.Test
             testContract.ContractLines.Add(testContractLine);
             testContract.Id = 1;
 
-            Assert.AreEqual(0, testContractLine.DeliveredAmount);
+            Assert.AreEqual(0, testContract.ContractLines.Find(x => x.Material.Type.Equals("E1")).DeliveredAmount);
+            //Assert.AreEqual(0, testContractLine.DeliveredAmount);
 
             cr.AddContract(testContract);
             cr.AddAmount(testContract.Id, testMaterial, 25);
 
-            Assert.AreEqual(25, testContractLine.DeliveredAmount);
+            Assert.AreEqual(25, testContract.ContractLines.Find(x => x.Material.Type.Equals("E1")).DeliveredAmount);
         }
     }
 }
