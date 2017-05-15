@@ -110,6 +110,8 @@ namespace Skrotlog.DAL
                     contract.Id = contractId;
 
                     contract.ContractLines = GetContractLines(contractId);
+
+                    contracts.Add(contract);
                 }
             }
 
@@ -127,7 +129,7 @@ namespace Skrotlog.DAL
 
             using(MySqlConnection con = new MySqlConnection(connectionString.ToString()))
             {
-                string query = "SELECT MaterialId, Price, TotalAmount, DeliveredAmount, LineComment, Active FROM ContractLine WHERE ContractLineId=" + id;
+                string query = "SELECT MaterialId, Price, TotalAmount, DeliveredAmount, LineComment, Active FROM ContractLine WHERE ContractId=" + id;
                 MySqlCommand cmd = new MySqlCommand(query, con);
 
                 con.Open();

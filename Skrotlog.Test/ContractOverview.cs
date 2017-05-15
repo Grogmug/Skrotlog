@@ -60,7 +60,7 @@ namespace Skrotlog.Test
             Assert.AreEqual(1000, actual.ContractLines[0].TotalAmount);
             Assert.AreEqual(0, actual.ContractLines[0].DeliveredAmount);
             Assert.AreEqual(1000, actual.ContractLines[0].RemainingAmount);
-            Assert.AreEqual(0.50, actual.ContractLines[0].Price);
+            Assert.AreEqual(0.50m, actual.ContractLines[0].Price);
         }
     }
 }
