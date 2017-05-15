@@ -8,6 +8,8 @@ namespace Skrotlog.Domain
 {
     public class ContractLine
     {
+        bool active;
+
         public decimal Price { get; set; }
         public Material Material { get; set; }
         public int TotalAmount { get; set; }
@@ -16,19 +18,38 @@ namespace Skrotlog.Domain
         {
             get { return TotalAmount - DeliveredAmount; }
         }
+        public string Comment { get; set; }
+        public bool Active
+        {
+            get
+            {
+                if(DeliveredAmount >= TotalAmount)
+                {
+                    active = false;
+                }
 
-        public bool Active { get; set; }
+                return active;
+            }
+            set
+            {
+                active = value;
+            }
+        }
 
         public ContractLine(Material material, decimal price, int amount)
         {
             Material = material;
             Price = price;
             TotalAmount = amount;
+            active = true;
+            Comment = "";
         }
-        public ContractLine(Material material, decimal price, int amount, int delivered)
+        public ContractLine(Material material, decimal price, int amount, int delivered, bool active, string comment)
             :this(material, price, amount)
         {
             DeliveredAmount = delivered;
+            Comment = comment;
+            Active = active;
         }
     }
 }

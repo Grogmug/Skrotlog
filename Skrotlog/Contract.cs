@@ -11,7 +11,19 @@ namespace Skrotlog.Domain
     {
         public int Id { get; set; }
         public Customer Customer { get; set; }
-        public bool Active { get; set; }
+        public bool Active
+        {
+            get
+            {
+                for(int i = 0; i < ContractLines.Count; i++)
+                {
+                    if (ContractLines[i].Active == true)
+                        return true;
+                }
+
+                return false;
+            }
+        }
         public DateTime Date { get; set; }
         public Currency Currency { get; set; }
         public string Initials { get; set; }

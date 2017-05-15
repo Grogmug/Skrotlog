@@ -10,6 +10,7 @@ namespace Skrotlog.BL
     public class BLFacade
     {
         private CustomerRepository customerRepository;
+
         #region Singleton Region
         private static volatile BLFacade instance;
         
@@ -25,9 +26,7 @@ namespace Skrotlog.BL
                 return instance;
             }
         }
-        #endregion
-
-        
+        #endregion        
 
         private BLFacade()
         {

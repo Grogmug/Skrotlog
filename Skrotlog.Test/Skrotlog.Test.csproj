@@ -57,6 +57,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ContractCreation.cs" />
+    <Compile Include="ContractOverview.cs" />
     <Compile Include="ContractUpdate.cs" />
     <Compile Include="CustomerCreation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

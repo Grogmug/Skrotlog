@@ -105,6 +105,7 @@ namespace Skrotlog.DAL
                     string currencyString = reader["Currency"].ToString();
                     Currency currency = (Currency)Enum.Parse(typeof(Currency), currencyString);
                     string initials = reader["Initials"].ToString();
+
                     Contract contract = new Contract(customer, date, currency, initials);
                     contract.Id = contractId;
 
@@ -120,7 +121,7 @@ namespace Skrotlog.DAL
             return GetContracts().FindAll(x => x.Customer.Name == customerName);
         }
 
-        private List<ContractLine> GetContractLines(int id)
+        public List<ContractLine> GetContractLines(int id)
         {
             List<ContractLine> contractLines = new List<ContractLine>();
 
@@ -137,10 +138,12 @@ namespace Skrotlog.DAL
                     int materialId = int.Parse(reader["MaterialId"].ToString());
                     Material m = GetMaterial(materialId);
                     decimal price = decimal.Parse(reader["Price"].ToString());
-                    int amount = int.Parse(reader["Amount"].ToString());
+                    int amount = int.Parse(reader["TotalAmount"].ToString());
                     int delivered = int.Parse(reader["DeliveredAmount"].ToString());
+                    bool active = bool.Parse(reader["Active"].ToString());
+                    string comment = reader["LineComment"].ToString();
 
-                    ContractLine c = new ContractLine(m, price, amount, delivered);
+                    ContractLine c = new ContractLine(m, price, amount, delivered, active, comment);
                     contractLines.Add(c);
                 }
             }
@@ -148,7 +151,7 @@ namespace Skrotlog.DAL
             return contractLines;
         }
 
-        private Material GetMaterial(int id)
+        public Material GetMaterial(int id)
         {
             using (MySqlConnection con = new MySqlConnection(connectionString.ToString()))
             {

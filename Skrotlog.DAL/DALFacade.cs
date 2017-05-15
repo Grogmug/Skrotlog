@@ -9,6 +9,8 @@ namespace Skrotlog.DAL
 {
     public class DALFacade
     {
+        DatabaseController dbController;
+
         #region Singleton Region
         private static volatile DALFacade instance;
 
@@ -25,8 +27,6 @@ namespace Skrotlog.DAL
             }
         }
         #endregion
-
-        DatabaseController dbController;
 
         private DALFacade()
         {
