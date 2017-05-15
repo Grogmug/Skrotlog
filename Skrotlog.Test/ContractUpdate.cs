@@ -21,17 +21,15 @@ namespace Skrotlog.Test
         {
             Material testMaterial = new Material("E1", "Jern");
             Customer testCustomer = new Customer("testCompany", "testland");
-            Contract testContract = new Contract(testCustomer, new DateTime(2017, 1, 2), 0, "SH");
             ContractLine testContractLine = new ContractLine(testMaterial, 10, 200);
-            testContract.ContractLines.Add(testContractLine);
+        
+            cr.AddContract(testCustomer, DateTime.Now, 0, "SH");
+            Contract testContract = cr.Contracts[0];
             testContract.Id = 1;
+            testContract.ContractLines.Add(testContractLine);
 
             Assert.AreEqual(0, testContract.ContractLines.Find(x => x.Material.Type.Equals("E1")).DeliveredAmount);
-            //Assert.AreEqual(0, testContractLine.DeliveredAmount);
-
-            cr.AddContract(testContract);
             cr.AddAmount(testContract.Id, testMaterial, 25);
-
             Assert.AreEqual(25, testContract.ContractLines.Find(x => x.Material.Type.Equals("E1")).DeliveredAmount);
         }
     }

@@ -24,9 +24,9 @@ namespace Skrotlog.Test
             List<Material> testList = new List<Material>();
             testList.Add(testMaterial);
             Customer testCustomer = new Customer("TestCompany", "Denmark");
-            Contract testContract = new Contract(testCustomer, new DateTime(2017, 1, 1), Currency.DKK, "SH");
+            //Contract testContract = new Contract(testCustomer, new DateTime(2017, 1, 1), Currency.DKK, "SH");
 
-            cr.AddContract(testContract);
+            cr.AddContract(testCustomer, new DateTime(2017, 1, 1), Currency.DKK, "SH");
             Contract actual = cr.Contracts.Find(x => x.Customer.Name == "TestCompany");
             
             Assert.AreEqual("TestCompany", actual.Customer.Name);
