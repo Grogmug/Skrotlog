@@ -37,5 +37,11 @@ namespace Skrotlog.Domain
             Currency = currency;
             ContractLines = new List<ContractLine>();
         }
+
+        public Contract(int id, Customer c, DateTime date, Currency currency, string initials)
+            :this(c, date, currency, initials)
+        {
+            Id = id;
+        }
     }
 }

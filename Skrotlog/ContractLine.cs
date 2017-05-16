@@ -10,6 +10,7 @@ namespace Skrotlog.Domain
     {
         bool active;
 
+        public int Id { get; set; }
         public decimal Price { get; set; }
         public Material Material { get; set; }
         public int TotalAmount { get; set; }
@@ -50,6 +51,11 @@ namespace Skrotlog.Domain
             DeliveredAmount = delivered;
             Comment = comment;
             Active = active;
+        }
+        public ContractLine(int id, Material material, decimal price, int amount, int delivered, bool active, string comment)
+            :this(material, price, amount, delivered, active, comment)
+        {
+            Id = id;
         }
     }
 }
