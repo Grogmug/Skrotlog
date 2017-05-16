@@ -48,6 +48,9 @@ namespace Skrotlog.DAL
             return dbController.GetContracts(customerName);
         }
 
-
+        public void AddAmount(int contractId, int contractLineId, int amount)
+        {
+           // dbController.AddAmount(int contractId, int contractLineId, int amount);
+        }
     }
 }
