@@ -35,5 +35,16 @@ namespace Skrotlog.Test
             Assert.AreEqual(1, actual.Date.Day);
             Assert.AreEqual("SH", actual.Initials);
         }
+
+        [TestMethod]
+        public void ContractCreation_GetMaterial_ListOfMaterials()
+        {
+            List<Material> testList = new List<Material>();
+
+            Assert.AreEqual(0,testList.Count);
+            testList = BLFacade.Instance.GetMaterials();
+
+            Assert.AreEqual(5, testList.Count);
+        }
     }
 }
