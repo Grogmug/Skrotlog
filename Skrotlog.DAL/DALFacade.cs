@@ -52,5 +52,10 @@ namespace Skrotlog.DAL
         {
            // dbController.AddAmount(int contractId, int contractLineId, int amount);
         }
+
+        public List<Material> GetMaterials()
+        {
+            return dbController.GetMaterials();
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Skrotlog.Domain;
+using Skrotlog.DAL;
 
 namespace Skrotlog.BL
 {
@@ -50,12 +51,8 @@ namespace Skrotlog.BL
 
         public List<Material> GetMaterials()
         {
-            //Test data
-            List<Material> materials = new List<Material>();
-            materials.Add(new Material("Aluminium", "A"));
-            materials.Add(new Material("Jern", "E1"));
-            materials.Add(new Material("Kobber", "K"));
-            materials.Add(new Material("Messing", "M"));
+            List<Material> materials = DALFacade.Instance.GetMaterials();
+
             return materials.OrderBy(x => x.Type).ToList(); 
         }
     }
