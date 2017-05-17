@@ -82,19 +82,22 @@ namespace Skrotlog.Test
             Material material = new Material(1, "Jern", "J");
             ContractLine contractLine = new ContractLine(material, 0.50m, 1000, 0, true, "Nothing");
             DateTime date = new DateTime(2017, 5, 16);
-            Contract contract = new Contract(customer, date, Currency.DKK, "MR");
+            Contract contract = new Contract(4, customer, date, Currency.DKK, "MR");
             contract.ContractLines.Add(contractLine);
 
             dbc.AddContract(contract);
-            Contract actual = dbc.GetContracts().Last();
+            Contract actual = dbc.GetContract(4);
 
             Assert.AreEqual("TestCust", actual.Customer.Name);
-            Assert.AreEqual(1, actual.ContractLines.Count);
+            //Assert.AreEqual(1, actual.ContractLines.Count);
             Assert.AreEqual("Jern", actual.ContractLines[0].Material.Type);
             Assert.AreEqual(1000, actual.ContractLines[0].TotalAmount);
             Assert.AreEqual(0, actual.ContractLines[0].DeliveredAmount);
             Assert.AreEqual(1000, actual.ContractLines[0].RemainingAmount);
             Assert.AreEqual(0.50m, actual.ContractLines[0].Price);
+            Assert.AreEqual(2017, actual.Date.Year);
+            Assert.AreEqual(5, actual.Date.Month);
+            Assert.AreEqual(16, actual.Date.Day);
         }
     }
 }
