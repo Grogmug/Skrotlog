@@ -50,5 +50,10 @@ namespace Skrotlog.BL
 
             return outputList;
         }
+
+        public List<Contract> GetContracts()
+        {
+            return DALFacade.Instance.GetContracts();
+        }
     }
 }

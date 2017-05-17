@@ -62,5 +62,10 @@ namespace Skrotlog.BL
         {
             return contractRepository.GetCustomerContracts(customerId);
         }
+
+        public List<Contract> GetContracts()
+        {
+            return contractRepository.GetContracts();
+        }
     }
 }
