@@ -11,6 +11,7 @@ namespace Skrotlog.BL
     public class BLFacade
     {
         private CustomerRepository customerRepository;
+        private ContractRepository contractRepository;
 
         #region Singleton Region
         private static volatile BLFacade instance;
@@ -32,6 +33,7 @@ namespace Skrotlog.BL
         private BLFacade()
         {
             customerRepository = new CustomerRepository();
+            contractRepository = new ContractRepository();
         }
 
         public void AddCustomer(Customer c)
@@ -54,6 +56,11 @@ namespace Skrotlog.BL
             List<Material> materials = DALFacade.Instance.GetMaterials();
 
             return materials.OrderBy(x => x.Type).ToList(); 
+        }
+
+        public List<Contract> GetCustomerContracts(int customerId)
+        {
+            return contractRepository.GetCustomerContracts(customerId);
         }
     }
 }
