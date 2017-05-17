@@ -17,11 +17,11 @@ namespace Skrotlog.Test
         }
 
         [TestMethod]
-        public void ContractUpdate_AddAmount_DeliveredAmountEncreased()
+        public void ContractUpdate_AddAmount_DeliveredAmountIncreased()
         {
             Material testMaterial = new Material("E1", "Jern");
             Customer testCustomer = new Customer("testCompany", "testland");
-            ContractLine testContractLine = new ContractLine(testMaterial, 10, 200);
+            ContractLine testContractLine = new ContractLine(1, testMaterial, 1000, 0, 0, true, "test comment");
         
             cr.AddContract(testCustomer, DateTime.Now, 0, "SH");
             Contract testContract = cr.Contracts[0];
@@ -29,7 +29,7 @@ namespace Skrotlog.Test
             testContract.ContractLines.Add(testContractLine);
 
             Assert.AreEqual(0, testContract.ContractLines.Find(x => x.Material.Type.Equals("E1")).DeliveredAmount);
-            cr.AddAmount(testContract.Id, testMaterial, 25);
+            cr.AddAmount(testContract.Id, 1, 25);
             Assert.AreEqual(25, testContract.ContractLines.Find(x => x.Material.Type.Equals("E1")).DeliveredAmount);
         }
     }
