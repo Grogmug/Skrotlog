@@ -8,6 +8,7 @@ namespace Skrotlog.Domain
 {
     public class Material
     {
+        public int Id { get; set; }
         public string Type { get; set; }
         public string Designation { get; set; }
 
@@ -15,6 +16,12 @@ namespace Skrotlog.Domain
         {
             Type = type;
             Designation = designation;
+        }
+
+        public Material(int id, string type, string designation)
+            :this(type, designation)
+        {
+            Id = id;
         }
     }
 }

@@ -8,8 +8,14 @@ namespace Skrotlog.Domain
 {
     public class Customer
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Country { get; set; }
+
+        public Customer()
+        {
+
+        }
 
         public Customer(string name, string country)
         {
@@ -17,9 +23,11 @@ namespace Skrotlog.Domain
             Country = country;
         }
 
-        public Customer()
+        public Customer(int id, string name, string country)
+            :this(name, country)
         {
-
+            Id = id;
         }
+        
     }
 }
