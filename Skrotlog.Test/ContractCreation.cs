@@ -46,5 +46,15 @@ namespace Skrotlog.Test
 
             Assert.AreEqual(5, testList.Count);
         }
+
+        [TestMethod]
+        public void ContractCreation_GetContracts_ListOfContracts()
+        {
+            List<Contract> testContracts;
+            testContracts = cr.GetContracts();
+            
+            Assert.AreEqual(testContracts.Max(x => x.Id), testContracts.Count + 1);
+
+        }
     }
 }
