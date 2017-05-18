@@ -16,9 +16,9 @@ namespace Skrotlog.UI
         {
             get { return parentContract.Id; }
         }
-        public DateTime Date
+        public string Date
         {
-            get { return parentContract.Date; }
+            get { return parentContract.Date.ToString("dd-MM-yyyy"); }
         }
         public string CustomerName
         {
@@ -32,9 +32,9 @@ namespace Skrotlog.UI
         {
             get { return contractLineItem.Price; }
         }
-        public Currency Currency
+        public string Currency
         {
-            get { return parentContract.Currency; }
+            get { return parentContract.Currency.ToString(); }
         }
         public int TotalAmount
         {

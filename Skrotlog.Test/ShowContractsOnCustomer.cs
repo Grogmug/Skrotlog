@@ -11,7 +11,7 @@ using Skrotlog.BL;
 namespace Skrotlog.Test
 {
     [TestClass]
-    public class ShowContractsOnCustomer
+    public class ShowContractsForCustomer
     {
 
         [TestInitialize]
@@ -21,7 +21,7 @@ namespace Skrotlog.Test
         }
 
         [TestMethod]
-        public void ShowContractsOnCustomer_GetCustomerContracts_ListOfContracts()
+        public void ShowContractsForCustomer_GetCustomerContracts_ListOfContracts()
         {
             Customer testCustomer = new Customer(3, "TestCust", "Denmark");
             Customer testCustomer2 = new Customer(2, "TestCust", "Denmark");

@@ -6,27 +6,43 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using Skrotlog.Domain;
+using Skrotlog.BL;
 
 namespace Skrotlog.UI.ViewModel
 {
     class ContractViewModel
     {
-        public ObservableCollection<Contract> Contracts { get; set; }
-        public ObservableCollection<ContractLine> ContractLines
+        List<Contract> contracts;
+        ObservableCollection<ContractLineDisplayItem> displayItems;
+
+        public ObservableCollection<ContractLineDisplayItem> DisplayItems
         {
-            get
+            get { return displayItems; }
+        }
+
+        public ContractLineDisplayItem SelectedDisplayItem { get; set; }
+
+        public ContractViewModel()
+        {
+            contracts = BLFacade.Instance.GetContracts();
+            PopulateDisplayItems();
+        }
+
+        private void PopulateDisplayItems()
+        {
+            displayItems = new ObservableCollection<ContractLineDisplayItem>();
+
+            for(int i = 0; i < contracts.Count; i++)
             {
-                ObservableCollection<ContractLine> cl = new ObservableCollection<ContractLine>();
-
-                for(int i = 0; i < Contracts.Count; i++)
+                if(contracts[i].ContractLines.Count > 0)
                 {
-                    for(int y = 0; y < Contracts[i].ContractLines.Count; y++)
+                    for(int y = 0; y < contracts[i].ContractLines.Count; y++)
                     {
-                        cl.Add(Contracts[i].ContractLines[y]);
-                    }                        
-                }
+                        ContractLineDisplayItem item = new ContractLineDisplayItem(contracts[i], contracts[i].ContractLines[y]);
 
-                return cl;
+                        displayItems.Add(item);
+                    }
+                }
             }
         }
     }
