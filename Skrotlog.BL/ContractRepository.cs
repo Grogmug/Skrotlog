@@ -23,7 +23,7 @@ namespace Skrotlog.BL
 
         public ContractRepository()
         {
-            listOfContracts = new List<Contract>();
+            listOfContracts = DALFacade.Instance.GetContracts();
         }
         public void AddContract(Customer cust, DateTime date, Currency currency, string initials)
         {
@@ -40,6 +40,20 @@ namespace Skrotlog.BL
             ContractLine selectedContractLine = selectedContract.ContractLines.Find(x => x.Id == contractLineId);
             selectedContractLine.DeliveredAmount += amount;
             DALFacade.Instance.AddAmount( contractId, contractLineId, amount);
+        }
+
+        public List<Contract> GetCustomerContracts(int customerId)
+        {
+            List<Contract> outputList = new List<Contract>();
+
+            outputList = listOfContracts.FindAll(x => x.Customer.Id == customerId);
+
+            return outputList;
+        }
+
+        public List<Contract> GetContracts()
+        {
+            return DALFacade.Instance.GetContracts();
         }
     }
 }
