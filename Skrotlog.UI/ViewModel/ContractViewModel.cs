@@ -10,17 +10,26 @@ using Skrotlog.BL;
 
 namespace Skrotlog.UI.ViewModel
 {
-    class ContractViewModel
+    class ContractViewModel : INotifyPropertyChanged
     {
         List<Contract> contracts;
         ObservableCollection<ContractLineDisplayItem> displayItems;
+        ContractLineDisplayItem selectedDisplayItem;
 
         public ObservableCollection<ContractLineDisplayItem> DisplayItems
         {
             get { return displayItems; }
         }
 
-        public ContractLineDisplayItem SelectedDisplayItem { get; set; }
+        public ContractLineDisplayItem SelectedDisplayItem
+        {
+            get { return selectedDisplayItem; }
+            set
+            {
+                selectedDisplayItem = value;
+                RaisePropertyChanged("SelectedDisplayItem");
+            }
+        }
 
         public ContractViewModel()
         {
@@ -44,6 +53,14 @@ namespace Skrotlog.UI.ViewModel
                     }
                 }
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
     }
 }
