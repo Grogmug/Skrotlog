@@ -7,7 +7,21 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
     <Grid>
-        <DataGrid ItemsSource="{Binding DisplayItems}" SelectedItem="{Binding SelectedDisplayItem, UpdateSourceTrigger=PropertyChanged}" x:Name="ContractOverveiw" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" ColumnWidth="*">
+       
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding DisplayItems}" SelectedItem="{Binding SelectedDisplayItem, UpdateSourceTrigger=PropertyChanged}" x:Name="ContractOverveiw" HorizontalAlignment="Left" Margin="10,10,10,0" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MaxHeight="500">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="KontraktId" Binding="{Binding ContractId, Mode=OneWay}" />
+                <DataGridTextColumn Header="Dato" Binding="{Binding Date, Mode=OneWay}" />
+                <DataGridTextColumn Header="Kunde" Binding="{Binding CustomerName, Mode=OneWay}" />
+                <DataGridTextColumn Header="Materiale" Binding="{Binding MaterialName, Mode=OneWay}" />
+                <DataGridTextColumn Header="Pris" Binding="{Binding MaterialPrice, Mode=OneWay}" />
+                <DataGridTextColumn Header="Valuta" Binding="{Binding Currency, Mode=OneWay}" />
+                <DataGridTextColumn Header="Total Mængde" Binding="{Binding TotalAmount, Mode=OneWay}" />
+                <DataGridTextColumn Header="Afleveret Mængde" Binding="{Binding DeliveredAmount, Mode=OneWay}" />
+                <DataGridTextColumn Header="Resterne Mængde" Binding="{Binding RemainingAmount, Mode=OneWay}" />
+                <DataGridTextColumn Header="Kommentar" Binding="{Binding Comment, Mode=OneWay}" Width="80" />
+                <DataGridTextColumn Header="Initialer" Binding="{Binding Initials, Mode=OneWay}" />
+            </DataGrid.Columns>
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <TextBlock Height="20" Text="{Binding Comment}" />
