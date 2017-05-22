@@ -7,26 +7,32 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
     <Grid>
-       
-        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding DisplayItems}" SelectedItem="{Binding SelectedDisplayItem, UpdateSourceTrigger=PropertyChanged}" x:Name="ContractOverveiw" HorizontalAlignment="Left" Margin="10,10,10,0" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MaxHeight="500">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="KontraktId" Binding="{Binding ContractId, Mode=OneWay}" />
-                <DataGridTextColumn Header="Dato" Binding="{Binding Date, Mode=OneWay}" />
-                <DataGridTextColumn Header="Kunde" Binding="{Binding CustomerName, Mode=OneWay}" />
-                <DataGridTextColumn Header="Materiale" Binding="{Binding MaterialName, Mode=OneWay}" />
-                <DataGridTextColumn Header="Pris" Binding="{Binding MaterialPrice, Mode=OneWay}" />
-                <DataGridTextColumn Header="Valuta" Binding="{Binding Currency, Mode=OneWay}" />
-                <DataGridTextColumn Header="Total Mængde" Binding="{Binding TotalAmount, Mode=OneWay}" />
-                <DataGridTextColumn Header="Afleveret Mængde" Binding="{Binding DeliveredAmount, Mode=OneWay}" />
-                <DataGridTextColumn Header="Resterne Mængde" Binding="{Binding RemainingAmount, Mode=OneWay}" />
-                <DataGridTextColumn Header="Kommentar" Binding="{Binding Comment, Mode=OneWay}" Width="80" />
-                <DataGridTextColumn Header="Initialer" Binding="{Binding Initials, Mode=OneWay}" />
-            </DataGrid.Columns>
-            <DataGrid.RowDetailsTemplate>
-                <DataTemplate>
-                    <TextBlock Height="20" Text="{Binding Comment}" />
-                </DataTemplate>
-            </DataGrid.RowDetailsTemplate>
-        </DataGrid>
+        <StackPanel Orientation="Vertical">
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding DisplayItems}" SelectedItem="{Binding SelectedDisplayItem, UpdateSourceTrigger=PropertyChanged}" x:Name="ContractOverveiw" HorizontalAlignment="Left" Margin="10,10,10,0" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MaxHeight="500">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="KontraktId" Binding="{Binding ContractId, Mode=OneWay}" />
+                    <DataGridTextColumn Header="Dato" Binding="{Binding Date, Mode=OneWay}" />
+                    <DataGridTextColumn Header="Kunde" Binding="{Binding CustomerName, Mode=OneWay}" />
+                    <DataGridTextColumn Header="Materiale" Binding="{Binding MaterialName, Mode=OneWay}" />
+                    <DataGridTextColumn Header="Pris" Binding="{Binding MaterialPrice, Mode=OneWay}" />
+                    <DataGridTextColumn Header="Valuta" Binding="{Binding Currency, Mode=OneWay}" />
+                    <DataGridTextColumn Header="Total Mængde" Binding="{Binding TotalAmount, Mode=OneWay}" />
+                    <DataGridTextColumn Header="Afleveret Mængde" Binding="{Binding DeliveredAmount, Mode=OneWay}" />
+                    <DataGridTextColumn Header="Resterne Mængde" Binding="{Binding RemainingAmount, Mode=OneWay}" />
+                    <DataGridTextColumn Header="Kommentar" Binding="{Binding Comment, Mode=OneWay}" Width="80" />
+                    <DataGridTextColumn Header="Initialer" Binding="{Binding Initials, Mode=OneWay}" />
+                </DataGrid.Columns>
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <TextBlock Height="20" Text="{Binding Comment}" />
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+            </DataGrid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,20,0">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Mængde:" VerticalAlignment="Top" Margin="5,0,5,0"/>
+                <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Margin="5,0,5,0" Height="19"/>
+                <Button Content="Tilføj" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="55" Margin="5,0,5,0"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>
