@@ -30,8 +30,8 @@
             </DataGrid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,20,0">
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Mængde:" VerticalAlignment="Top" Margin="5,0,5,0"/>
-                <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Margin="5,0,5,0" Height="19"/>
-                <Button Content="Tilføj" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="55" Margin="5,0,5,0"/>
+                <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Margin="5,0,5,0" Height="19" Text="{Binding DeliveredAmount, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Content="Tilføj" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="55" Margin="5,0,5,0" Command="{Binding AddAmountCommand}"/>
             </StackPanel>
         </StackPanel>
     </Grid>
