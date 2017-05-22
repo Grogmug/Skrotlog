@@ -99,5 +99,17 @@ namespace Skrotlog.Test
             Assert.AreEqual(5, actual.Date.Month);
             Assert.AreEqual(16, actual.Date.Day);
         }
+
+        [TestMethod]
+        public void Database_AddAmount_DeliveredAmountIncreased()
+        {
+            ContractLine actual = dbc.GetContractLines(4).Last();
+            Assert.AreEqual(0, actual.DeliveredAmount);
+            dbc.AddAmount(actual.Id, 500);
+            actual = dbc.GetContractLines(4).Last();
+            Assert.AreEqual(500, actual.DeliveredAmount);
+
+            dbc.AddAmount(actual.Id, -500);                
+        }
     }
 }

@@ -50,7 +50,7 @@ namespace Skrotlog.DAL
 
         public void AddAmount(int contractId, int contractLineId, int amount)
         {
-           // dbController.AddAmount(int contractId, int contractLineId, int amount);
+            dbController.AddAmount(contractLineId, amount);
         }
 
         public List<Material> GetMaterials()
