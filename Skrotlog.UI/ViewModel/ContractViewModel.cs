@@ -15,6 +15,7 @@ namespace Skrotlog.UI.ViewModel
         List<Contract> contracts;
         ObservableCollection<ContractLineDisplayItem> displayItems;
         ContractLineDisplayItem selectedDisplayItem;
+        int deliveredAmount;
 
         public ObservableCollection<ContractLineDisplayItem> DisplayItems
         {
@@ -28,13 +29,30 @@ namespace Skrotlog.UI.ViewModel
             {
                 selectedDisplayItem = value;
                 RaisePropertyChanged("SelectedDisplayItem");
+                AddAmountCommand.RaiseCanExecuteChanged();
             }
+        }
+        public int DeliveredAmount
+        {
+            get { return deliveredAmount; }
+            set
+            {
+                deliveredAmount = value;
+                RaisePropertyChanged("DeliveredAmount");
+                AddAmountCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public DefaultCommand AddAmountCommand
+        {
+            get;
+            set;
         }
 
         public ContractViewModel()
         {
-            contracts = BLFacade.Instance.GetContracts();
-            PopulateDisplayItems();
+            UpdateContractList();
+            AddAmountCommand = new DefaultCommand(ExecuteAddAmount, CanAddAmount);
         }
 
         private void PopulateDisplayItems()
@@ -61,6 +79,24 @@ namespace Skrotlog.UI.ViewModel
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
+
+        public void ExecuteAddAmount()
+        {
+            BLFacade.Instance.AddAmount(SelectedDisplayItem.ContractId, SelectedDisplayItem.ContractLineId, DeliveredAmount);
+            UpdateContractList();
+            RaisePropertyChanged("DisplayItems");
+        }
+
+        public bool CanAddAmount()
+        {
+            return DeliveredAmount > 0 && SelectedDisplayItem != null;
+        }
+
+        private void UpdateContractList()
+        {
+            contracts = BLFacade.Instance.GetContracts();
+            PopulateDisplayItems();
         }
     }
 }

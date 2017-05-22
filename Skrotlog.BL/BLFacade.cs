@@ -67,5 +67,10 @@ namespace Skrotlog.BL
         {
             return contractRepository.GetContracts();
         }
+
+        public void AddAmount(int contractId, int contractLineId, int amount)
+        {
+            contractRepository.AddAmount(contractId,contractLineId, amount);
+        }
     }
 }

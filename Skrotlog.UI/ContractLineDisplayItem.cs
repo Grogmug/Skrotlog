@@ -16,6 +16,10 @@ namespace Skrotlog.UI
         {
             get { return parentContract.Id; }
         }
+        public int ContractLineId
+        {
+            get { return contractLineItem.Id; }
+        }
         public string Date
         {
             get { return parentContract.Date.ToString("dd-MM-yyyy"); }
