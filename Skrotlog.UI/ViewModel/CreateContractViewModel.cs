@@ -15,7 +15,6 @@ namespace Skrotlog.UI.ViewModel
         ObservableCollection<Material> materialCollection;
 
         public Customer SelectedCustomer { get; set; }
-
         public List<Customer> Customers
         {
             get
@@ -25,9 +24,7 @@ namespace Skrotlog.UI.ViewModel
                 return customers;
             }
         }
-
         public Material SelectedMaterial { get; set; }
-
         public List<Material> Materials
         {
             get
@@ -37,11 +34,8 @@ namespace Skrotlog.UI.ViewModel
                 return materials;
             }
         }
-
         public int Amount { get; set; }
-
         public decimal Price { get; set; }
-
         public Currency SelectedCurrency { get; set; }
         public List<Currency> Currencies
         {
@@ -53,31 +47,13 @@ namespace Skrotlog.UI.ViewModel
                 return currencies;
             }
         }
-
-        public string MaterialListDescription
-        {
-            get
-            {
-                string description = "";
-
-                for(int i = 0; i < materialCollection.Count; i++)
-                {
-                    description += materialCollection[i].Type + "\n";
-                }
-
-                return description;
-            }
-        }
-
         public DefaultCommand CreateCommand { get; set; }
         public DefaultCommand AddCommand { get; set; }
-        public DefaultCommand ClearCommand { get; set; }
 
         public CreateContractViewModel()
         {
             CreateCommand = new DefaultCommand(ExecuteCreate, CanCreate);
             AddCommand = new DefaultCommand(ExecuteAdd);
-            ClearCommand = new DefaultCommand(ExecuteClear);
             materialCollection = new ObservableCollection<Material>();
         }
 
@@ -89,7 +65,6 @@ namespace Skrotlog.UI.ViewModel
 
             RaisePropertyChanged("Amount");
             RaisePropertyChanged("Price");
-            RaisePropertyChanged("MaterialListDescription");
         }
 
         public bool CanCreate()
@@ -100,13 +75,6 @@ namespace Skrotlog.UI.ViewModel
         public void ExecuteAdd()
         {
             materialCollection.Add(SelectedMaterial);
-            RaisePropertyChanged("MaterialListDescription");
-        }
-
-        public void ExecuteClear()
-        {
-            materialCollection.Clear();
-            RaisePropertyChanged("MaterialListDescription");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
