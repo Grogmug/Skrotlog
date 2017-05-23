@@ -53,9 +53,7 @@ namespace Skrotlog.BL
 
         public List<Material> GetMaterials()
         {
-            List<Material> materials = DALFacade.Instance.GetMaterials();
-
-            return materials.OrderBy(x => x.Type).ToList(); 
+            return DALFacade.Instance.GetMaterials().OrderBy(x => x.Type).ToList();
         }
 
         public List<Contract> GetCustomerContracts(int customerId)
