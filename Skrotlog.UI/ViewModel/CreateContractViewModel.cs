@@ -12,8 +12,6 @@ namespace Skrotlog.UI.ViewModel
 {
     class CreateContractViewModel : INotifyPropertyChanged
     {
-        ObservableCollection<Material> materialCollection;
-
         public Customer SelectedCustomer { get; set; }
         public List<Customer> Customers
         {
@@ -34,8 +32,10 @@ namespace Skrotlog.UI.ViewModel
                 return materials;
             }
         }
+        public int ContractId { get; set; }
         public int Amount { get; set; }
         public decimal Price { get; set; }
+        public string Comment { get; set; }
         public Currency SelectedCurrency { get; set; }
         public List<Currency> Currencies
         {
@@ -47,34 +47,29 @@ namespace Skrotlog.UI.ViewModel
                 return currencies;
             }
         }
-        public DefaultCommand CreateCommand { get; set; }
-        public DefaultCommand AddCommand { get; set; }
+        public DefaultCommand CreateContractCommand { get; set; }
+        public DefaultCommand CreateContractLineCommand { get; set; }
 
         public CreateContractViewModel()
         {
-            CreateCommand = new DefaultCommand(ExecuteCreate, CanCreate);
-            AddCommand = new DefaultCommand(ExecuteAdd);
-            materialCollection = new ObservableCollection<Material>();
+            CreateContractCommand = new DefaultCommand(ExecuteCreateContract);
+            CreateContractLineCommand = new DefaultCommand(ExecuteCreateContractLine, CanCreateContractLine);
         }
 
-        public void ExecuteCreate()
+        public void ExecuteCreateContract()
         {
-            Amount = 0;
-            Price = 0;
-            materialCollection.Clear();
-
-            RaisePropertyChanged("Amount");
-            RaisePropertyChanged("Price");
+            BLFacade.Instance.AddContract(SelectedCustomer, DateTime.Now, SelectedCurrency, "MR");
+            ContractId = BLFacade.Instance.GetContracts().Last().Id;
+            RaisePropertyChanged("ContractId");
         }
 
-        public bool CanCreate()
+        public void ExecuteCreateContractLine()
+        {
+            BLFacade.Instance.AddContractLine(ContractId, SelectedMaterial, Price, Amount, Comment);
+        }
+        public bool CanCreateContractLine()
         {
             return true;
-        }
-
-        public void ExecuteAdd()
-        {
-            materialCollection.Add(SelectedMaterial);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -84,5 +79,6 @@ namespace Skrotlog.UI.ViewModel
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
+
     }
 }

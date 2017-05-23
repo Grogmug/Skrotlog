@@ -7,15 +7,40 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
     <Grid>
-        <GroupBox Header="Kontrakt oprettelse" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <GroupBox Header="Kontrakt oprettelse" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
-                
+                <ComboBox ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}" DisplayMemberPath="Name" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10" SelectedIndex="0"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Valuta" Margin="10,10" Width="40"/>
+                    <ComboBox ItemsSource="{Binding Currencies}" SelectedItem="{Binding SelectedCurrency}" Width="60" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10" SelectedIndex="0"/>
+                </StackPanel>
+                <Button Command="{Binding CreateContractCommand}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="50" Height="22" Content="Tilføj" Margin="10,10"/>
             </StackPanel>
         </GroupBox>
-        <GroupBox Header="Kontrakt - tingel tangel" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="278,0,0,0">
-            <StackPanel Orientation="Horizontal">
-                <ComboBox ItemsSource="{Binding Materials}" SelectedItem="{Binding SelectedMaterial}" DisplayMemberPath="Type" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10" SelectedIndex="0"/>
-                <Button Command="{Binding AddCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="22" Content="Tilføj" Margin="10,10"/>
+        <GroupBox Header="Kontraktlinje" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="220,20,0,0">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="KontraktNr." Margin="10,10" Width="60"/>
+                    <TextBox Text="{Binding ContractId}" Width="80" Margin="0,10,10,10"/>
+                </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                    <ComboBox ItemsSource="{Binding Materials}" SelectedItem="{Binding SelectedMaterial}" DisplayMemberPath="Type" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10" SelectedIndex="0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Enhedspris" Margin="10,10" Width="60"/>
+                    <TextBox Text="{Binding Price}" Width="80" Margin="0,10,10,10"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Mængde" Margin="10,10" Width="60"/>
+                    <TextBox Text="{Binding Amount}" Width="80" Margin="0,10,10,10"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Bemærkning:" HorizontalAlignment="Left" Margin="10,10" Width="70"/>
+                    <TextBox Text="{Binding Comment}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Width="150" Height="43"/>
+                </StackPanel>
+                    <StackPanel>
+                    <Button Command="{Binding CreateContractLineCommand}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="50" Height="22" Content="Tilføj" Margin="10,10"/>
+                </StackPanel>
             </StackPanel>
         </GroupBox>
     </Grid>
