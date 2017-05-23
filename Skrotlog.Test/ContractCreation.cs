@@ -23,13 +23,12 @@ namespace Skrotlog.Test
             Material testMaterial = new Material("E1", "Jern");
             List<Material> testList = new List<Material>();
             testList.Add(testMaterial);
-            Customer testCustomer = new Customer("TestCompany", "Denmark");
-            //Contract testContract = new Contract(testCustomer, new DateTime(2017, 1, 1), Currency.DKK, "SH");
+            Customer testCustomer = new Customer(1 ,"STENA", "Danmark");
 
             cr.AddContract(testCustomer, new DateTime(2017, 1, 1), Currency.DKK, "SH");
-            Contract actual = cr.Contracts.Find(x => x.Customer.Name == "TestCompany");
+            Contract actual = cr.Contracts.Last();
             
-            Assert.AreEqual("TestCompany", actual.Customer.Name);
+            Assert.AreEqual("STENA", actual.Customer.Name);
             Assert.AreEqual(2017, actual.Date.Year);
             Assert.AreEqual(1, actual.Date.Month);
             Assert.AreEqual(1, actual.Date.Day);

@@ -21,7 +21,7 @@ namespace Skrotlog.Test
         public void ContractUpdate_AddAmount_DeliveredAmountIncreased()
         {
             Material testMaterial = new Material("E1", "Jern");
-            Customer testCustomer = new Customer("testCompany", "testland");
+            Customer testCustomer = new Customer(1, "STENA", "Danmark");
             ContractLine testContractLine = new ContractLine(1, testMaterial, 1000, 0, 0, true, "test comment");
         
             cr.AddContract(testCustomer, DateTime.Now, 0, "SH");
