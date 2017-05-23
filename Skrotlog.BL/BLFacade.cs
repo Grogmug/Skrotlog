@@ -73,9 +73,13 @@ namespace Skrotlog.BL
             contractRepository.AddAmount(contractId,contractLineId, amount);
         }
 
-        public void AddContract(Customer cust, DateTime date, Currency currency, string initials)
+        public void AddContract(Customer customer, DateTime date, Currency currency, string initials)
         {
-            contractRepository.AddContract(cust, date, currency, initials);
+            contractRepository.AddContract(customer, date, currency, initials);
+        }
+        public void AddContractLine(int contractId, Material material, decimal price, int amount, string comment)
+        {
+            contractRepository.AddContractLine(contractId, material, price, amount, comment);
         }
     }
 }
