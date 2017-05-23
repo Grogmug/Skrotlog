@@ -67,5 +67,10 @@ namespace Skrotlog.DAL
         {
             dbController.AddContract(contract);
         }
+
+        public void AddContractLine(int contractId, ContractLine contractLine)
+        {
+            dbController.AddContractLine(contractId, contractLine);
+        }
     }
 }

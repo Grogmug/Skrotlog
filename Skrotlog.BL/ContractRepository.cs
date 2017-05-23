@@ -32,6 +32,13 @@ namespace Skrotlog.BL
             DALFacade.Instance.AddContract(c);           
         }
 
+        public void AddContractLine(int contractId, Material material, decimal price, int amount, string comment)
+        {
+            ContractLine c = new ContractLine(material, price, amount, comment);
+            listOfContracts.Find(x => x.Id == contractId).ContractLines.Add(c);
+            DALFacade.Instance.AddContractLine(contractId, c);
+        }
+
         public void AddAmount(int contractId, int contractLineId, int amount)
         {            
             Contract selectedContract = listOfContracts.Find(x => x.Id == contractId);

@@ -45,11 +45,17 @@ namespace Skrotlog.Domain
             active = true;
             Comment = "";
         }
-        public ContractLine(Material material, decimal price, int amount, int delivered, bool active, string comment)
+
+        public ContractLine(Material material, decimal price, int amount, string comment)
             :this(material, price, amount)
         {
-            DeliveredAmount = delivered;
             Comment = comment;
+        }
+
+        public ContractLine(Material material, decimal price, int amount, int delivered, bool active, string comment)
+            :this(material, price, amount, comment)
+        {
+            DeliveredAmount = delivered;
             Active = active;
         }
         public ContractLine(int id, Material material, decimal price, int amount, int delivered, bool active, string comment)
