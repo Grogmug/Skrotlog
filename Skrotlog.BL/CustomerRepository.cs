@@ -34,11 +34,13 @@ namespace Skrotlog.BL
         public void AddCustomer(Customer c)
         {
             listOfCustomers.Add(c);
+            DALFacade.Instance.AddCustomer(c);
         }
 
         public  void AddCustomer(string name, string country)
         {
-            listOfCustomers.Add(new Customer(name, country));
+            Customer c = new Customer(name, country);
+            AddCustomer(c);
         }
     }
 }

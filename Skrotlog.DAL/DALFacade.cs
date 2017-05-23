@@ -57,5 +57,10 @@ namespace Skrotlog.DAL
         {
             return dbController.GetMaterials();
         }
+
+        public void AddCustomer(Customer c)
+        {
+            dbController.AddCustomer(c);
+        }
     }
 }
