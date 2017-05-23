@@ -25,12 +25,11 @@ namespace Skrotlog.BL
         {
             listOfContracts = DALFacade.Instance.GetContracts();
         }
-        public void AddContract(Customer cust, DateTime date, Currency currency, string initials)
+        public void AddContract(Customer customer, DateTime date, Currency currency, string initials)
         {
-            Contract c = new Contract(cust, date, currency, initials);
+            Contract c = new Contract(customer, date, currency, initials);
             listOfContracts.Add(c);
-            //DALFacade.Instance.AddContract(c);
-            
+            DALFacade.Instance.AddContract(c);           
         }
 
         public void AddAmount(int contractId, int contractLineId, int amount)
@@ -54,5 +53,6 @@ namespace Skrotlog.BL
         {
             return DALFacade.Instance.GetContracts();
         }
+
     }
 }
