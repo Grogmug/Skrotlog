@@ -30,10 +30,13 @@ namespace Skrotlog.BL
         }
         #endregion        
 
+        public decimal ExchangeRate;
+
         private BLFacade()
         {
             customerRepository = new CustomerRepository();
             contractRepository = new ContractRepository();
+            ExchangeRate = 0m;
         }
 
         public void AddCustomer(string name, string country)
@@ -73,6 +76,12 @@ namespace Skrotlog.BL
         public void AddContractLine(int contractId, Material material, decimal price, int amount, string comment)
         {
             contractRepository.AddContractLine(contractId, material, price, amount, comment);
+        }
+        public void ReturnSummedValue(DateTime startDate, DateTime endDate, out decimal outputInDK, out decimal outputInEur)
+        {
+            Statistics stats = new Statistics(contractRepository.GetContracts());
+            stats.ReturnSummedValues(startDate, endDate, out outputInDK, out outputInEur);
+            
         }
 
     }
