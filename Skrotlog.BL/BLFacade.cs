@@ -79,5 +79,6 @@ namespace Skrotlog.BL
         {
             contractRepository.AddContractLine(contractId, material, price, amount, comment);
         }
+
     }
 }
