@@ -17,6 +17,7 @@
                 <Button Command="{Binding CreateContractCommand}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="50" Height="22" Content="Tilføj" Margin="10,10"/>
             </StackPanel>
         </GroupBox>
+        <TextBlock Margin="22,174,0,0" Width="150" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding Information}" TextWrapping="Wrap"/>
         <GroupBox Header="Kontraktlinje" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="220,20,0,0">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">

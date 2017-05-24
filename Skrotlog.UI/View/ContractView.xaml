@@ -5,20 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Skrotlog.UI.View"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500">
+             d:DesignHeight="300" d:DesignWidth="800">
     <Grid>
         <StackPanel Orientation="Vertical">
             <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding DisplayItems}" SelectedItem="{Binding SelectedDisplayItem, UpdateSourceTrigger=PropertyChanged}" x:Name="ContractOverveiw" HorizontalAlignment="Left" Margin="10,10,10,0" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MaxHeight="500">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="KontraktId" Binding="{Binding ContractId, Mode=OneWay}" />
-                    <DataGridTextColumn Header="Dato" Binding="{Binding Date, Mode=OneWay}" />
-                    <DataGridTextColumn Header="Kunde" Binding="{Binding CustomerName, Mode=OneWay}" />
-                    <DataGridTextColumn Header="Materiale" Binding="{Binding MaterialName, Mode=OneWay}" />
-                    <DataGridTextColumn Header="Pris" Binding="{Binding MaterialPrice, Mode=OneWay}" />
+                    <DataGridTextColumn Header="KontraktId" Binding="{Binding ContractId, Mode=OneWay}" Width="80" />
+                    <DataGridTextColumn Header="Dato" Binding="{Binding Date, Mode=OneWay}" Width="*"/>
+                    <DataGridTextColumn Header="Kunde" Binding="{Binding CustomerName, Mode=OneWay}" Width="*"/>
+                    <DataGridTextColumn Header="Materiale" Binding="{Binding MaterialName, Mode=OneWay}" Width="*"/>
+                    <DataGridTextColumn Header="Pris" Binding="{Binding MaterialPrice, Mode=OneWay}" Width="80" />
                     <DataGridTextColumn Header="Valuta" Binding="{Binding Currency, Mode=OneWay}" />
-                    <DataGridTextColumn Header="Total Mængde" Binding="{Binding TotalAmount, Mode=OneWay}" />
-                    <DataGridTextColumn Header="Afleveret Mængde" Binding="{Binding DeliveredAmount, Mode=OneWay}" />
-                    <DataGridTextColumn Header="Resterne Mængde" Binding="{Binding RemainingAmount, Mode=OneWay}" />
+                    <DataGridTextColumn Header="Total Mængde" Binding="{Binding TotalAmount, Mode=OneWay}" Width="*"/>
+                    <DataGridTextColumn Header="Afleveret Mængde" Binding="{Binding DeliveredAmount, Mode=OneWay}" Width="*"/>
+                    <DataGridTextColumn Header="Resterne Mængde" Binding="{Binding RemainingAmount, Mode=OneWay}" Width="*"/>
                     <DataGridTextColumn Header="Bemærking" Binding="{Binding Comment, Mode=OneWay}" Width="80" />
                     <DataGridTextColumn Header="Initialer" Binding="{Binding Initials, Mode=OneWay}" />
                 </DataGrid.Columns>

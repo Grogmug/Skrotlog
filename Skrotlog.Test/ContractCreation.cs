@@ -26,7 +26,7 @@ namespace Skrotlog.Test
             Customer testCustomer = new Customer(1 ,"STENA", "Danmark");
 
             cr.AddContract(testCustomer, new DateTime(2017, 1, 1), Currency.DKK, "SH");
-            Contract actual = cr.Contracts.Last();
+            Contract actual = cr.GetContracts().Last();
             
             Assert.AreEqual("STENA", actual.Customer.Name);
             Assert.AreEqual(2017, actual.Date.Year);

@@ -25,13 +25,13 @@ namespace Skrotlog.Test
             ContractLine testContractLine = new ContractLine(1, testMaterial, 1000, 0, 0, true, "test comment");
         
             cr.AddContract(testCustomer, DateTime.Now, 0, "SH");
-            Contract actual = cr.Contracts[0];
+            Contract actual = cr.GetContracts()[0];
             actual.Id = 1;
             actual.ContractLines.Add(testContractLine);
 
             Assert.AreEqual(0, actual.ContractLines.First().DeliveredAmount);
             cr.AddAmount(actual.Id, testContractLine.Id, 25);
-            actual = cr.Contracts[0];
+            actual = cr.GetContracts()[0];
             Assert.AreEqual(25, actual.ContractLines.First().DeliveredAmount);
 
             cr.AddAmount(actual.Id, testContractLine.Id, -25);
