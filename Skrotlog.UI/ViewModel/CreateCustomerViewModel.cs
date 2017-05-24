@@ -25,7 +25,6 @@ namespace Skrotlog.UI.ViewModel
                 CreateCommand.RaiseCanExecuteChanged();
             }
         }
-
         public string Country
         {
             get
@@ -38,7 +37,7 @@ namespace Skrotlog.UI.ViewModel
                 CreateCommand.RaiseCanExecuteChanged();
             }
         }
-
+        public string Information { get; set; }
         public DefaultCommand CreateCommand { get; set; }
 
         public CreateCustomerViewModel()
@@ -52,8 +51,10 @@ namespace Skrotlog.UI.ViewModel
 
             Name = "";
             Country = "";
+            Information = string.Format("{0} er oprettet i systemet.", Name);
             RaisePropertyChanged("Name");
             RaisePropertyChanged("Country");
+            RaisePropertyChanged("Information");
         }
 
         public bool CanCreate()

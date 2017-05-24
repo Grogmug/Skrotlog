@@ -11,36 +11,29 @@ namespace Skrotlog.BL
     public class CustomerRepository
     {
         private List<Customer> listOfCustomers;
+        private DALFacade dal;
 
         public int Count
         {
             get { return listOfCustomers.Count; }
         }
 
-        public List<Customer> Customers
-        {
-            get
-            {
-                return listOfCustomers.OrderBy(x => x.Name).ToList();
-            }
-        }
-
         public CustomerRepository()
         {
-            listOfCustomers = new List<Customer>();
-            listOfCustomers = DALFacade.Instance.GetCustomers();
-        }
-
-        public void AddCustomer(Customer customer)
-        {
-            listOfCustomers.Add(customer);
-            DALFacade.Instance.AddCustomer(customer);
+            dal = DALFacade.Instance;
+            listOfCustomers = dal.GetCustomers();
         }
 
         public  void AddCustomer(string name, string country)
         {
             Customer c = new Customer(name, country);
-            AddCustomer(c);
+            listOfCustomers.Add(c);
+            dal.AddCustomer(c);
+        }
+
+        public List<Customer> GetCustomers()
+        {
+            return listOfCustomers;
         }
     }
 }

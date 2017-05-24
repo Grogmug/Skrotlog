@@ -12,6 +12,7 @@ namespace Skrotlog.UI.ViewModel
 {
     class ContractViewModel : INotifyPropertyChanged
     {
+        private BLFacade bl;
         List<Contract> contracts;
         ObservableCollection<ContractLineDisplayItem> displayItems;
         ContractLineDisplayItem selectedDisplayItem;
@@ -43,14 +44,11 @@ namespace Skrotlog.UI.ViewModel
             }
         }
 
-        public DefaultCommand AddAmountCommand
-        {
-            get;
-            set;
-        }
+        public DefaultCommand AddAmountCommand { get; set; }
 
         public ContractViewModel()
         {
+            bl = BLFacade.Instance;
             UpdateContractList();
             AddAmountCommand = new DefaultCommand(ExecuteAddAmount, CanAddAmount);
         }
@@ -71,19 +69,11 @@ namespace Skrotlog.UI.ViewModel
                     }
                 }
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-        }
+        }        
 
         public void ExecuteAddAmount()
         {
-            BLFacade.Instance.AddAmount(SelectedDisplayItem.ContractId, SelectedDisplayItem.ContractLineId, DeliveredAmount);
+            bl.AddAmount(SelectedDisplayItem.ContractId, SelectedDisplayItem.ContractLineId, DeliveredAmount);
             UpdateContractList();
             RaisePropertyChanged("DisplayItems");
         }
@@ -95,8 +85,16 @@ namespace Skrotlog.UI.ViewModel
 
         private void UpdateContractList()
         {
-            contracts = BLFacade.Instance.GetContracts();
+            contracts = bl.GetContracts();
             PopulateDisplayItems();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
     }
 }

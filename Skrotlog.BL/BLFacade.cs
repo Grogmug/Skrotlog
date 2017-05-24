@@ -36,11 +36,6 @@ namespace Skrotlog.BL
             contractRepository = new ContractRepository();
         }
 
-        public void AddCustomer(Customer customer)
-        {
-            customerRepository.AddCustomer(customer);
-        }
-
         public void AddCustomer(string name, string country)
         {
             customerRepository.AddCustomer(name, country);
@@ -48,7 +43,7 @@ namespace Skrotlog.BL
 
         public List<Customer> GetCustomers()
         {
-            return customerRepository.Customers;
+            return customerRepository.GetCustomers();
         }
 
         public List<Material> GetMaterials()

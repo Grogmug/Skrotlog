@@ -20,7 +20,7 @@
             </StackPanel>
 
             <Button Command="{Binding CreateCommand}" Content="Gem" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50" Height="22" Margin="106,0,0,0"/>
-
+            <TextBlock Text="{Binding Information}" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="155" Height="100"/>
         </StackPanel>
     </Grid>
 </UserControl>

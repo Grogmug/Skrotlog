@@ -12,12 +12,14 @@ namespace Skrotlog.UI.ViewModel
 {
     class CreateContractViewModel : INotifyPropertyChanged
     {
+        private BLFacade bl;
+
         public Customer SelectedCustomer { get; set; }
         public List<Customer> Customers
         {
             get
             {
-                List<Customer> customers = BLFacade.Instance.GetCustomers();
+                List<Customer> customers = bl.GetCustomers();
                 SelectedCustomer = customers.First();
                 return customers;
             }
@@ -27,7 +29,7 @@ namespace Skrotlog.UI.ViewModel
         {
             get
             {
-                List<Material> materials = BLFacade.Instance.GetMaterials();
+                List<Material> materials = bl.GetMaterials();
                 SelectedMaterial = materials.First();
                 return materials;
             }
@@ -47,25 +49,33 @@ namespace Skrotlog.UI.ViewModel
                 return currencies;
             }
         }
+        public string Information { get; set; }
         public DefaultCommand CreateContractCommand { get; set; }
         public DefaultCommand CreateContractLineCommand { get; set; }
 
         public CreateContractViewModel()
         {
+            bl = BLFacade.Instance;
             CreateContractCommand = new DefaultCommand(ExecuteCreateContract);
             CreateContractLineCommand = new DefaultCommand(ExecuteCreateContractLine, CanCreateContractLine);
         }
 
         public void ExecuteCreateContract()
         {
-            BLFacade.Instance.AddContract(SelectedCustomer, DateTime.Now, SelectedCurrency, "MR");
-            ContractId = BLFacade.Instance.GetContracts().Last().Id;
+            bl.AddContract(SelectedCustomer, DateTime.Now, SelectedCurrency, "MR");
+            ContractId = bl.GetContracts().Last().Id;
+            Information = string.Format("Kontrakten til {0} blev oprettet med kontraktnr. {1}", SelectedCustomer.Name, ContractId);
             RaisePropertyChanged("ContractId");
+            RaisePropertyChanged("Information");
         }
 
         public void ExecuteCreateContractLine()
         {
-            BLFacade.Instance.AddContractLine(ContractId, SelectedMaterial, Price, Amount, Comment);
+            bl.AddContractLine(ContractId, SelectedMaterial, Price, Amount, Comment);
+            Amount = 0;
+            Price = 0;
+            Information = string.Format("Kontraktlinjen med materialet {0}, til kontraktnr. {1} blev oprettet.", SelectedMaterial.Type, ContractId);
+            RaisePropertyChanged("Information");
         }
         public bool CanCreateContractLine()
         {
