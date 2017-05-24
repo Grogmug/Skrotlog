@@ -86,6 +86,7 @@ namespace Skrotlog.BL
         {
             Statistics stats = new Statistics(contractRepository.GetContracts());
             stats.ReturnSummedValues(startDate, endDate, out outputInDK, out outputInEur);
+            
         }
 
     }

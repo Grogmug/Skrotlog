@@ -7,9 +7,17 @@ using Skrotlog.Domain;
 
 namespace Skrotlog.BL
 {
+    /// <summary>
+    /// Represents a Class for performing analysis on collections of Contracts 
+    /// </summary>
     class Statistics
     {
         private List<Contract> targetContracts;
+       
+        public Statistics()
+        {
+
+        }
         public Statistics(List<Contract> listOfContracts)
         {
             targetContracts = listOfContracts;
@@ -21,8 +29,8 @@ namespace Skrotlog.BL
         /// </summary>
         /// <param name="startDate">The inclusive DateTime, which marks the start of the period.</param>
         /// <param name="endDate">The inclusive DateTime, which marks the start of the period.</param>
-        /// <param name="outputInDKK">The sum of all contracts, where the currency is marked as danish</param>
         /// <param name="outputInEur">The sum of all contracts, where the currency is marked as european</param>
+        /// <param name="outputInDKK">The sum of all contracts, where the currency is marked as danish</param>
         public void ReturnSummedValues(DateTime startDate, DateTime endDate, out decimal outputInDKK, out decimal outputInEur)
         {
             List<Contract> calculationList = targetContracts.FindAll(x => x.Date == startDate && x.Date <= endDate);
@@ -51,9 +59,7 @@ namespace Skrotlog.BL
             }
             outputInDKK = sumDKK;
             outputInEur = sumEur;
-            
-
-            
+                        
         }
     }
 }
