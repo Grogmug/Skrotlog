@@ -15,23 +15,43 @@ namespace Skrotlog.BL
             targetContracts = listOfContracts;
         }
 
-        public void ReturnSummedValue(DateTime startDate, DateTime endDate, decimal exchangeRate, out decimal outputInDK, out decimal outputInEur)
+
+        /// <summary>
+        /// Returns the summed up values of all contracts within a given period of time. Currencies are summed up individually
+        /// </summary>
+        /// <param name="startDate">The inclusive DateTime, which marks the start of the period.</param>
+        /// <param name="endDate">The inclusive DateTime, which marks the start of the period.</param>
+        /// <param name="outputInDKK">The sum of all contracts, where the currency is marked as danish</param>
+        /// <param name="outputInEur">The sum of all contracts, where the currency is marked as european</param>
+        public void ReturnSummedValues(DateTime startDate, DateTime endDate, out decimal outputInDKK, out decimal outputInEur)
         {
-            List<Contract> calculationList = targetContracts.FindAll(x => x.Date >= startDate && x.Date <= endDate);
-            decimal outputContainer = 0m;
-            foreach (var targetContract in targetContracts)
-            {  
+            List<Contract> calculationList = targetContracts.FindAll(x => x.Date == startDate && x.Date <= endDate);
+            decimal sumDKK = 0m;
+            decimal sumEur = 0m;
+            decimal tempContainer = 0m;
+
+            foreach (var targetContract in calculationList)
+            {
                 foreach (var targetContractLine in targetContract.ContractLines)
                 {
-                    outputContainer += targetContractLine.Price;
+                    tempContainer += targetContractLine.Price * targetContractLine.DeliveredAmount;
                 }
 
-                if (targetContract.Currency == Currency.EUR)
+                switch (targetContract.Currency)
                 {
-
+                    case Currency.DKK:
+                        sumDKK += tempContainer;
+                        break;
+                    case Currency.EUR:
+                        sumEur += tempContainer;
+                        break;
+                    default:
+                        break;
                 }
             }
-
+            outputInDKK = sumDKK;
+            outputInEur = sumEur;
+            
 
             
         }

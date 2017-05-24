@@ -85,9 +85,7 @@ namespace Skrotlog.BL
         public void ReturnSummedValue(DateTime startDate, DateTime endDate, out decimal outputInDK, out decimal outputInEur)
         {
             Statistics stats = new Statistics(contractRepository.GetContracts());
-            stats.ReturnSummedValue(startDate, endDate, ExchangeRate, out outputInDK, out outputInEur);
-
-
+            stats.ReturnSummedValues(startDate, endDate, out outputInDK, out outputInEur);
         }
 
     }
