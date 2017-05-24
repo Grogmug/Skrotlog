@@ -36,6 +36,7 @@ namespace Skrotlog.Domain
             Initials = initials;
             Currency = currency;
             ContractLines = new List<ContractLine>();
+            
         }
 
         public Contract(int id, Customer c, DateTime date, Currency currency, string initials)

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Skrotlog.UI"
         xmlns:view="clr-namespace:Skrotlog.UI.View"
         mc:Ignorable="d"
-        Title="SkrotLog" Height="600" Width="800">
+        Title="SkrotLog" Height="625" Width="825">
     <Grid>
         <TabControl>
             <TabItem Header="Kontrakter">
