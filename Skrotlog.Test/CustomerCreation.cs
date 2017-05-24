@@ -22,8 +22,8 @@ namespace Skrotlog.Test
         {
             Customer testCustomer = new Customer("TestCompany", "Denmark");
 
-            cr.AddCustomer(testCustomer);
-            Customer actual = cr.Customers.Find(x => x.Name == "TestCompany");
+            cr.AddCustomer("TestCompany", "Denmark");
+            Customer actual = cr.GetCustomers().Find(x => x.Name == "TestCompany");
             
             Assert.AreEqual("TestCompany", actual.Name);
             Assert.AreEqual("Denmark", actual.Country);
