@@ -12,54 +12,64 @@ namespace Skrotlog.BL
     /// </summary>
     class Statistics
     {
-        private List<Contract> targetContracts;
+        //private List<Contract> calcList; 
+        private decimal exchangeRateEur;
        
         public Statistics()
         {
-
+            //calcList = new List<Contract>();
+            exchangeRateEur = 7.5m;
         }
-        public Statistics(List<Contract> listOfContracts)
-        {
-            targetContracts = listOfContracts;
-        }
-
-
+    
         /// <summary>
-        /// Returns the summed up values of all contracts within a given period of time. Currencies are summed up individually
+        /// Returns the summed up value of all contracts negotiated in a given currency. 
         /// </summary>
         /// <param name="startDate">The inclusive DateTime, which marks the start of the period.</param>
         /// <param name="endDate">The inclusive DateTime, which marks the start of the period.</param>
-        /// <param name="outputInEur">The sum of all contracts, where the currency is marked as european</param>
-        /// <param name="outputInDKK">The sum of all contracts, where the currency is marked as danish</param>
-        public void ReturnSummedValues(DateTime startDate, DateTime endDate, out decimal outputInDKK, out decimal outputInEur)
+        /// <param name="targetContracts">The collection of  Contracts </param>
+        /// <param name="currency">the currency to</param>
+        public decimal ReturnSummedUpContracts(DateTime startDate, DateTime endDate, List<Contract> targetContracts, Currency currency)
         {
-            List<Contract> calculationList = targetContracts.FindAll(x => x.Date == startDate && x.Date <= endDate);
-            decimal sumDKK = 0m;
-            decimal sumEur = 0m;
-            decimal tempContainer = 0m;
+            decimal sumOfContracts = 0m;
 
-            foreach (var targetContract in calculationList)
+            foreach (var targetContract in targetContracts)
             {
-                foreach (var targetContractLine in targetContract.ContractLines)
+                if (targetContract.Date >= startDate && targetContract.Date <= endDate && targetContract.Currency == currency)
                 {
-                    tempContainer += targetContractLine.Price * targetContractLine.DeliveredAmount;
-                }
+                    foreach (var targetContractLine in targetContract.ContractLines)
+                    {
+                        sumOfContracts += targetContractLine.DeliveredAmount * targetContractLine.Price;
+                    }
+                }    
+            }
+            return sumOfContracts;
+        }
 
-                switch (targetContract.Currency)
+        /// <summary>
+        /// Returns the summed up amount of a given Material delivered to a given Country. 
+        /// </summary>
+        /// <param name="startDate">The inclusive DateTime, which marks the start of the period.</param>
+        /// <param name="endDate">The inclusive DateTime, which marks the start of the period.</param>
+        /// <param name="targetContracts">The collection of  Contracts </param>
+        /// <param name="material">The type of material, whoose delivered amount is to be calculated</param>
+        /// <param name="Country">The name of the Country</param>
+        public int ReturnSummedUpMaterials(DateTime startDate, DateTime endDate, List<Contract> targetContracts, Material material, string country)
+        {
+            int sumOfMaterials = 0;
+            ContractLine localCont;
+
+            foreach (var targetContract in targetContracts)
+            {
+                if (startDate <= targetContract.Date && targetContract.Date <= endDate && targetContract.Customer.Country == country)
                 {
-                    case Currency.DKK:
-                        sumDKK += tempContainer;
-                        break;
-                    case Currency.EUR:
-                        sumEur += tempContainer;
-                        break;
-                    default:
-                        break;
+                    if ((localCont = targetContract.ContractLines.Find(x => x.Material == material)) != null)
+                    {
+                        sumOfMaterials += localCont.DeliveredAmount;
+                    }
                 }
             }
-            outputInDKK = sumDKK;
-            outputInEur = sumEur;
-                        
+            return sumOfMaterials;
         }
+
     }
 }
