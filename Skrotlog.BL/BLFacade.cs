@@ -84,12 +84,6 @@ namespace Skrotlog.BL
             contractRepository.AddContractLine(contractId, material, price, amount, comment);
         }
 
-        public void ReturnSummedValue(DateTime startDate, DateTime endDate, out decimal outputInDK, out decimal outputInEur)
-        {
-            Statistics stats = new Statistics(contractRepository.GetContracts());
-            stats.ReturnSummedValues(startDate, endDate, out outputInDK, out outputInEur);            
-        }
-
         public void DeactivateContractLine(int contractId, int contractLineId)
         {
             contractRepository.DeactiveContractLine(contractId, contractLineId);
