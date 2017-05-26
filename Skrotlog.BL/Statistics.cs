@@ -60,13 +60,12 @@ namespace Skrotlog.BL
 
             foreach (var targetContract in targetContracts)
             {
-                if (targetContract.Date >= startDate && targetContract.Date <= endDate && targetContract.Customer.Country == country)
+                if (startDate <= targetContract.Date && targetContract.Date <= endDate && targetContract.Customer.Country == country)
                 {
                     if ((localCont = targetContract.ContractLines.Find(x => x.Material == material)) != null)
                     {
                         sumOfMaterials += localCont.DeliveredAmount;
                     }
-                    
                 }
             }
             return sumOfMaterials;
