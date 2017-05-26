@@ -56,15 +56,19 @@ namespace Skrotlog.BL
         public int ReturnSummedUpMaterials(DateTime startDate, DateTime endDate, List<Contract> targetContracts, Material material, string country)
         {
             int sumOfMaterials = 0;
+            ContractLine localCont;
 
             foreach (var targetContract in targetContracts)
             {
                 if (targetContract.Date >= startDate && targetContract.Date <= endDate && targetContract.Customer.Country == country)
                 {
-                    sumOfMaterials += targetContract.ContractLines.Find(x => x.Material == material).DeliveredAmount;
+                    if ((localCont = targetContract.ContractLines.Find(x => x.Material == material)) != null)
+                    {
+                        sumOfMaterials += localCont.DeliveredAmount;
+                    }
+                    
                 }
             }
-
             return sumOfMaterials;
         }
 
