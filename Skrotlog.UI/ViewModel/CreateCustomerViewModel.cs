@@ -49,9 +49,9 @@ namespace Skrotlog.UI.ViewModel
         {
             BLFacade.Instance.AddCustomer(Name, Country);
 
+            Information = string.Format("{0} er oprettet i systemet.", Name);
             Name = "";
             Country = "";
-            Information = string.Format("{0} er oprettet i systemet.", Name);
             RaisePropertyChanged("Name");
             RaisePropertyChanged("Country");
             RaisePropertyChanged("Information");

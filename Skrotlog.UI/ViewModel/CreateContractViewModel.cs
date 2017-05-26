@@ -13,14 +13,30 @@ namespace Skrotlog.UI.ViewModel
     class CreateContractViewModel : INotifyPropertyChanged
     {
         private BLFacade bl;
+        private List<Customer> customers;
+        private Customer selectedCustomer;
 
-        public Customer SelectedCustomer { get; set; }
+        public Customer SelectedCustomer
+        {
+            get
+            {
+                if (selectedCustomer == null)
+                    selectedCustomer = customers.First();
+
+                return selectedCustomer;
+            }
+            set
+            {
+                selectedCustomer = value;
+            }
+        }
         public List<Customer> Customers
         {
             get
             {
-                List<Customer> customers = bl.GetCustomers();
-                SelectedCustomer = customers.First();
+                if (customers == null)
+                    customers = bl.GetCustomers();
+
                 return customers;
             }
         }
@@ -52,12 +68,15 @@ namespace Skrotlog.UI.ViewModel
         public string Information { get; set; }
         public DefaultCommand CreateContractCommand { get; set; }
         public DefaultCommand CreateContractLineCommand { get; set; }
+        public DefaultCommand UpdateCustomersCommand { get; set; }
 
         public CreateContractViewModel()
         {
             bl = BLFacade.Instance;
+
             CreateContractCommand = new DefaultCommand(ExecuteCreateContract);
             CreateContractLineCommand = new DefaultCommand(ExecuteCreateContractLine, CanCreateContractLine);
+            UpdateCustomersCommand = new DefaultCommand(ExecuteUpdateCustomers);
         }
 
         public void ExecuteCreateContract()
@@ -80,6 +99,12 @@ namespace Skrotlog.UI.ViewModel
         public bool CanCreateContractLine()
         {
             return true;
+        }
+
+        public void ExecuteUpdateCustomers()
+        {
+            customers = bl.GetCustomers();
+            RaisePropertyChanged("Customers");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

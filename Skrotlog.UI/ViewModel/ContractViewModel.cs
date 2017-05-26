@@ -17,10 +17,18 @@ namespace Skrotlog.UI.ViewModel
         ObservableCollection<ContractLineDisplayItem> displayItems;
         ContractLineDisplayItem selectedDisplayItem;
         int deliveredAmount;
+        string searchText;
+        bool showInactive;
 
         public ObservableCollection<ContractLineDisplayItem> DisplayItems
         {
-            get { return displayItems; }
+            get
+            {
+                if (showInactive)
+                    return displayItems;
+
+                return new ObservableCollection<ContractLineDisplayItem>(displayItems.ToList().FindAll(x => x.Active == true));
+            }
         }
 
         public ContractLineDisplayItem SelectedDisplayItem
@@ -44,24 +52,64 @@ namespace Skrotlog.UI.ViewModel
             }
         }
 
+        public string SearchText
+        {
+            get
+            {
+                if (searchText == null)
+                    searchText = "";
+
+                return searchText;
+            }
+            set
+            {
+                searchText = value;
+                RaisePropertyChanged("SearchText");
+                SearchCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public bool ShowInactive
+        {
+            get
+            {
+                return showInactive;
+            }
+            set
+            {
+                showInactive = value;
+                
+                RaisePropertyChanged("DisplayItems");
+            }
+        }
+
         public DefaultCommand AddAmountCommand { get; set; }
+        public DefaultCommand SearchCommand { get; set; }
+        public DefaultCommand UpdateCommand { get; set; }
 
         public ContractViewModel()
         {
             bl = BLFacade.Instance;
             UpdateContractList();
             AddAmountCommand = new DefaultCommand(ExecuteAddAmount, CanAddAmount);
+            SearchCommand = new DefaultCommand(ExecuteSearch, CanSearch);
+            UpdateCommand = new DefaultCommand(ExecuteUpdate);
         }
 
         private void PopulateDisplayItems()
         {
+            PopulateDisplayItems(contracts);
+        }    
+        
+        private void PopulateDisplayItems(List<Contract> contracts)
+        {
             displayItems = new ObservableCollection<ContractLineDisplayItem>();
 
-            for(int i = 0; i < contracts.Count; i++)
+            for (int i = 0; i < contracts.Count; i++)
             {
-                if(contracts[i].ContractLines.Count > 0)
+                if (contracts[i].ContractLines.Count > 0)
                 {
-                    for(int y = 0; y < contracts[i].ContractLines.Count; y++)
+                    for (int y = 0; y < contracts[i].ContractLines.Count; y++)
                     {
                         ContractLineDisplayItem item = new ContractLineDisplayItem(contracts[i], contracts[i].ContractLines[y]);
 
@@ -69,7 +117,12 @@ namespace Skrotlog.UI.ViewModel
                     }
                 }
             }
-        }        
+        }
+        private void UpdateContractList()
+        {
+            contracts = bl.GetContracts();
+            PopulateDisplayItems();
+        }
 
         public void ExecuteAddAmount()
         {
@@ -81,12 +134,39 @@ namespace Skrotlog.UI.ViewModel
         public bool CanAddAmount()
         {
             return DeliveredAmount > 0 && SelectedDisplayItem != null;
+        }        
+
+        public void ExecuteSearch()
+        {
+            if (searchText == "")
+                UpdateContractList();
+            else
+            {
+                PopulateDisplayItems(bl.GetCustomerContracts(searchText));
+            }
+
+            RaisePropertyChanged("DisplayItems");
         }
 
-        private void UpdateContractList()
+        public bool CanSearch()
         {
-            contracts = bl.GetContracts();
-            PopulateDisplayItems();
+            return SearchText != "";
+        }
+
+        public void ExecuteUpdate()
+        {
+            UpdateContractList();
+            RaisePropertyChanged("DisplayItems");
+        }
+
+        public void ExecuteDeactivate()
+        {
+            bl.DeactivateContractLine(SelectedDisplayItem.ContractId, SelectedDisplayItem.ContractLineId);
+        }
+
+        public bool CanDeactivate()
+        {
+            return SelectedDisplayItem != null;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

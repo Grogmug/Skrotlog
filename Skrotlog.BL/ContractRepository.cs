@@ -48,16 +48,23 @@ namespace Skrotlog.BL
 
         public List<Contract> GetCustomerContracts(int customerId)
         {
-            List<Contract> outputList = new List<Contract>();
+            return listOfContracts.FindAll(x => x.Customer.Id == customerId);
+        }
 
-            outputList = listOfContracts.FindAll(x => x.Customer.Id == customerId);
-
-            return outputList;
+        public List<Contract> GetCustomerContracts(string name)
+        {
+            return listOfContracts.FindAll(x => x.Customer.Name.ToLower() == name.ToLower());
         }
 
         public List<Contract> GetContracts()
         {
             return listOfContracts;
+        }
+
+        public void DeactiveContractLine(int contractId, int contractLineId)
+        {
+            listOfContracts.Find(x => x.Id == contractId).ContractLines.Find(x => x.Id == contractLineId).Active = false;
+            dal.DeactivateContractLine(contractLineId);
         }
 
     }
