@@ -31,12 +31,6 @@ namespace Skrotlog.BL
         }
         #endregion        
 
-        public decimal ExchangeRateEur
-        {
-            get { return stats.ExchangeRateEur; }
-            set { stats.ExchangeRateEur = value; }
-        }
-
         private BLFacade()
         {
             customerRepository = new CustomerRepository();
@@ -111,7 +105,25 @@ namespace Skrotlog.BL
             return stats.ReturnSummedUpContracts(startDate, endDate, targetContracts, currency);
         }
 
-        
+        public string GetInitials()
+        {
+            return BLFacade.Instance.GetInitials();
+        }
+
+        public void SetInitials(string initials)
+        {
+            BLFacade.Instance.SetInitials(initials);
+        }
+
+        public decimal GetExchangeRate()
+        {
+            return BLFacade.Instance.GetExchangeRate();
+        }
+
+        public void SetExchangeRate(decimal exchangeRate)
+        {
+            BLFacade.Instance.SetExchangeRate(exchangeRate);
+        }
 
     }
 }

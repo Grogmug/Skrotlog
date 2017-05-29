@@ -47,6 +47,7 @@
     <Compile Include="DALFacade.cs" />
     <Compile Include="DatabaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingsReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -57,6 +58,11 @@
       <Project>{94d80377-9ded-46da-b274-77a5174a4ad4}</Project>
       <Name>Skrotlog.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="settings.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -10,6 +10,7 @@ namespace Skrotlog.DAL
     public class DALFacade
     {
         DatabaseController dbController;
+        SettingsReader settingsReader;
 
         #region Singleton Region
         private static volatile DALFacade instance;
@@ -31,6 +32,7 @@ namespace Skrotlog.DAL
         private DALFacade()
         {
             dbController = new DatabaseController();
+            settingsReader = new SettingsReader();
         }
 
         public List<Customer> GetCustomers()
@@ -91,6 +93,26 @@ namespace Skrotlog.DAL
         public void RemoveContractLine(int contractLineId)
         {
             dbController.RemoveContractLine(contractLineId);
+        }
+
+        public string GetInitials()
+        {
+            return settingsReader.Initials;
+        }
+
+        public void SetInitials(string initials)
+        {
+            settingsReader.Initials = initials;
+        }
+
+        public decimal GetExchangeRate()
+        {
+            return settingsReader.ExchangeRate;
+        }
+
+        public void SetExchangeRate(decimal exchangeRate)
+        {
+            settingsReader.ExchangeRate = exchangeRate;
         }
     }
 }
