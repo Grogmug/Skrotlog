@@ -43,13 +43,51 @@ namespace Skrotlog.BL
             {
                 if (targetContract.Currency == currency && targetContract.Date >= startDate && targetContract.Date <= endDate)
                 {
-                    foreach (var targetContractLine in targetContract.ContractLines)
-                    {
-                        sumOfContracts += targetContractLine.DeliveredAmount * targetContractLine.Price;
-                    }
+                    sumOfContracts += SumUpContractLines(targetContract.ContractLines);
                 }    
             }
             return sumOfContracts;
+        }
+
+        /// <summary>
+        /// Returns the summed up price of all Contracts in the given Collection. Exchangerate for contracts 
+        /// negotiated in Euroes is determinded by the Property "ExchangeRateEur" 
+        /// </summary>
+        /// <param name="startDate">The inclusive DateTime, which marks the start of the period.</param>
+        /// <param name="endDate">The inclusive DateTime, which marks the start of the period.</param>
+        /// <param name="targetContracts">The collection of  Contracts </param>
+        public decimal ReturnTotalSumOfContracts(DateTime startDate, DateTime endDate, List<Contract> targetContracts)
+        {
+            decimal sumOfContractsLines = 0m;
+
+            foreach (var targetContract in targetContracts)
+            {
+                if (targetContract.Date >= startDate && targetContract.Date <= endDate)
+                {
+                    switch (targetContract.Currency)
+                    {
+                        case Currency.DKK:
+                            sumOfContractsLines += SumUpContractLines(targetContract.ContractLines);
+                            break;
+                        case Currency.EUR:
+                            sumOfContractsLines += SumUpContractLines(targetContract.ContractLines) * exchangeRateEur;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                
+            }
+            return sumOfContractsLines;
+        }
+        private decimal SumUpContractLines(List<ContractLine> targetLines)
+        {
+            decimal output = 0m;
+            foreach (var targetLine in targetLines)
+            {
+                output += targetLine.Price * targetLine.DeliveredAmount;
+            }
+            return output;
         }
 
         /// <summary>

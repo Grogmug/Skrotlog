@@ -12,6 +12,7 @@ namespace Skrotlog.BL
     {
         private CustomerRepository customerRepository;
         private ContractRepository contractRepository;
+        private Statistics stats;
 
         #region Singleton Region
         private static volatile BLFacade instance;
@@ -30,13 +31,17 @@ namespace Skrotlog.BL
         }
         #endregion        
 
-        public decimal ExchangeRate;
+        public decimal ExchangeRateEur
+        {
+            get { return stats.ExchangeRateEur; }
+            set { stats.ExchangeRateEur = value; }
+        }
 
         private BLFacade()
         {
             customerRepository = new CustomerRepository();
             contractRepository = new ContractRepository();
-            ExchangeRate = 0m;
+            stats = new Statistics();
         }
 
         public void AddCustomer(string name, string country)
@@ -88,6 +93,20 @@ namespace Skrotlog.BL
         {
             contractRepository.DeactiveContractLine(contractId, contractLineId);
         }
+
+        //Statistics Methods
+
+        public decimal ReturnTotalSumOfContracts(DateTime startDate, DateTime endDate, List<Contract> targetContracts)
+        {
+            return stats.ReturnTotalSumOfContracts(startDate, endDate, targetContracts);
+        }
+
+        public decimal ReturnSummedUpContracts(DateTime startDate, DateTime endDate, List<Contract> targetContracts, Currency currency)
+        {
+            return stats.ReturnSummedUpContracts(startDate, endDate, targetContracts, currency);
+        }
+
+        
 
     }
 }
