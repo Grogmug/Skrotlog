@@ -14,6 +14,13 @@ namespace Skrotlog.BL
     {
         //private List<Contract> calcList; 
         private decimal exchangeRateEur;
+
+        public decimal ExchangeRateEur
+        {
+            get { return exchangeRateEur; }
+            set { exchangeRateEur = value; }
+        }
+
        
         public Statistics()
         {
@@ -27,14 +34,14 @@ namespace Skrotlog.BL
         /// <param name="startDate">The inclusive DateTime, which marks the start of the period.</param>
         /// <param name="endDate">The inclusive DateTime, which marks the start of the period.</param>
         /// <param name="targetContracts">The collection of  Contracts </param>
-        /// <param name="currency">the currency to</param>
+        /// <param name="currency">The currency of the Contracts to be summed up</param>
         public decimal ReturnSummedUpContracts(DateTime startDate, DateTime endDate, List<Contract> targetContracts, Currency currency)
         {
             decimal sumOfContracts = 0m;
 
             foreach (var targetContract in targetContracts)
             {
-                if (targetContract.Date >= startDate && targetContract.Date <= endDate && targetContract.Currency == currency)
+                if (targetContract.Currency == currency && targetContract.Date >= startDate && targetContract.Date <= endDate)
                 {
                     foreach (var targetContractLine in targetContract.ContractLines)
                     {
@@ -60,7 +67,7 @@ namespace Skrotlog.BL
 
             foreach (var targetContract in targetContracts)
             {
-                if (startDate <= targetContract.Date && targetContract.Date <= endDate && targetContract.Customer.Country == country)
+                if (targetContract.Customer.Country == country && startDate <= targetContract.Date && targetContract.Date <= endDate)
                 {
                     if ((localCont = targetContract.ContractLines.Find(x => x.Material == material)) != null)
                     {
