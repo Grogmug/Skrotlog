@@ -80,7 +80,12 @@ namespace Skrotlog.DAL
 
         public void DeactivateContractLine(int contractLineId)
         {
-            //dbController.DeactivateContractLine(contractLineId);
+            dbController.DeactivateContractLine(contractLineId);
+        }
+
+        public void RemoveContractLine(int contractLineId)
+        {
+            dbController.RemoveContractLine(contractLineId);
         }
     }
 }
