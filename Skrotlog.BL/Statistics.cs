@@ -110,14 +110,9 @@ namespace Skrotlog.BL
 
         public List<StatContainer> ReturnMaterialAndCountryOverview(DateTime startDate, DateTime endDate, List<Contract> targetContracts)
         {
-            List<StatContainer> statcont = CreateStatContainers(targetContracts.Where(x => x.Date >= startDate && x.Date <= endDate));
-
-
-          
-            
-            
-                   
-            throw new NotImplementedException();
+            //this may not even work.....
+            return CreateStatContainers(targetContracts.Where(x => x.Date >= startDate && x.Date <= endDate));
+                       
         }
 
         private decimal SumUpContractLines(List<ContractLine> targetLines)
@@ -132,6 +127,7 @@ namespace Skrotlog.BL
 
         private List<StatContainer> CreateStatContainers(IEnumerable<Contract> targetContracts)
         {
+
             IEnumerable<string> countries = targetContracts.Select(x => x.Customer.Country).Distinct();
             //List<Material> mats = targetContracts.SelectMany(x => x.ContractLines).Select(x => x.Material).Distinct().ToList();
             List<StatContainer> statcont = new List<StatContainer>();
