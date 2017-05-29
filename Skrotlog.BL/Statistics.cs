@@ -80,15 +80,7 @@ namespace Skrotlog.BL
             }
             return sumOfContractsLines;
         }
-        private decimal SumUpContractLines(List<ContractLine> targetLines)
-        {
-            decimal output = 0m;
-            foreach (var targetLine in targetLines)
-            {
-                output += targetLine.Price * targetLine.DeliveredAmount;
-            }
-            return output;
-        }
+        
 
         /// <summary>
         /// Returns the summed up amount of a given Material delivered to a given Country. 
@@ -114,6 +106,57 @@ namespace Skrotlog.BL
                 }
             }
             return sumOfMaterials;
+        }
+
+        public List<StatContainer> ReturnMaterialAndCountryOverview(DateTime startDate, DateTime endDate, List<Contract> targetContracts)
+        {
+            List<StatContainer> statcont = CreateStatContainers(targetContracts.Where(x => x.Date >= startDate && x.Date <= endDate));
+
+
+          
+            
+            
+                   
+            throw new NotImplementedException();
+        }
+
+        private decimal SumUpContractLines(List<ContractLine> targetLines)
+        {
+            decimal output = 0m;
+            foreach (var targetLine in targetLines)
+            {
+                output += targetLine.Price * targetLine.DeliveredAmount;
+            }
+            return output;
+        }
+
+        private List<StatContainer> CreateStatContainers(IEnumerable<Contract> targetContracts)
+        {
+            IEnumerable<string> countries = targetContracts.Select(x => x.Customer.Country).Distinct();
+            //List<Material> mats = targetContracts.SelectMany(x => x.ContractLines).Select(x => x.Material).Distinct().ToList();
+            List<StatContainer> statcont = new List<StatContainer>();
+
+            foreach (string countryString in countries)
+            {
+                foreach (Contract contract in targetContracts)
+                {
+                    if (contract.Customer.Country.Equals(countryString))
+                    {
+                        foreach (var contractLine in contract.ContractLines)
+                        {
+                            if (!statcont.Exists(x => x.Material.Type.Equals(contractLine.Material.Type)))
+                            {
+                                statcont.Add(new StatContainer(contract.Customer.Country, contractLine.Material, contractLine.DeliveredAmount));
+                            }
+                            else
+                            {
+                                statcont.Find(x => x.Country.Equals(countryString) && x.Material.Type.Equals(contractLine.Material.Type)).Amount += contractLine.DeliveredAmount;
+                            }
+                        }
+                    }
+                }
+            }
+            return statcont;
         }
 
     }

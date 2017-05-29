@@ -9,6 +9,8 @@ namespace Skrotlog.DAL
 {
     public class SettingsReader
     {
+        //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) == C:\Users\"Current User"\Documents\
+        //string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Skrotlog\\settings.ini";
         string path = "settings.ini";
         string initials = "MR";
         decimal exchangeRate = 7.5m;
@@ -41,7 +43,7 @@ namespace Skrotlog.DAL
 
         public SettingsReader()
         {
-            //using(StreamReader sr = new StreamReader(path))
+            //using (StreamReader sr = new StreamReader(path))
             //{
             //    Initials = sr.ReadLine();
             //    ExchangeRate = decimal.Parse(sr.ReadLine());

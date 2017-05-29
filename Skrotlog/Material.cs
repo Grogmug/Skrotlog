@@ -14,6 +14,7 @@ namespace Skrotlog.Domain
 
         public Material(string type, string designation)
         {
+            
             Type = type;
             Designation = designation;
         }
