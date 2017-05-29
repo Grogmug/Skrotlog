@@ -111,5 +111,47 @@ namespace Skrotlog.Test
 
             dbc.AddAmount(actual.Id, -500);                
         }
+
+        [TestMethod]
+        public void Database_DeactivateContractLine()
+        {
+            Material m = new Material(1, "Jern", "J");
+            ContractLine cl = new ContractLine(m, 5.00m, 100, 0, true, "");
+            dbc.AddContractLine(84, cl);
+            Contract c = dbc.GetContract(84);
+            ContractLine actualLine = c.ContractLines.Last();
+
+            Assert.AreEqual(true, actualLine.Active);
+            dbc.DeactivateContractLine(actualLine.Id);
+
+            c = dbc.GetContract(84);
+            actualLine = c.ContractLines.Last();
+
+            Assert.AreEqual(false, actualLine.Active);
+        }
+
+        [TestMethod]
+        public void Database_RemoveContractLine()
+        {
+            Material m = new Material(2, "Kobber", "K");
+            ContractLine cl = new ContractLine(m, 20.00m, 1000, 50, true, "");
+            dbc.AddContractLine(84, cl);
+            Contract c = dbc.GetContract(84);
+            ContractLine actualLine = c.ContractLines.Last();
+
+            Assert.AreEqual("K", actualLine.Material.Designation);
+            Assert.AreEqual(20.00m, actualLine.Price);
+            Assert.AreEqual(1000, actualLine.TotalAmount);
+            Assert.AreEqual(50, actualLine.DeliveredAmount);
+
+            dbc.RemoveContractLine(actualLine.Id);
+            c = dbc.GetContract(84);
+            actualLine = c.ContractLines.Last();
+
+            Assert.AreNotEqual("K", actualLine.Material.Designation);
+            Assert.AreNotEqual(20.00m, actualLine.Price);
+            Assert.AreNotEqual(1000, actualLine.TotalAmount);
+            Assert.AreNotEqual(50, actualLine.DeliveredAmount);
+        }
     }
 }
