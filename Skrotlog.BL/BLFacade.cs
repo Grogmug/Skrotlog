@@ -94,6 +94,11 @@ namespace Skrotlog.BL
             contractRepository.DeactiveContractLine(contractId, contractLineId);
         }
 
+        public void RemoveContractLine(int contractId, int contractLineId)
+        {
+            contractRepository.RemoveContractLine(contractId, contractLineId);
+        }
+
         //Statistics Methods
 
         public decimal ReturnTotalSumOfContracts(DateTime startDate, DateTime endDate, List<Contract> targetContracts)

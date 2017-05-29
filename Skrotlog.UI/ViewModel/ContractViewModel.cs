@@ -86,6 +86,8 @@ namespace Skrotlog.UI.ViewModel
         public DefaultCommand AddAmountCommand { get; set; }
         public DefaultCommand SearchCommand { get; set; }
         public DefaultCommand UpdateCommand { get; set; }
+        public DefaultCommand DeactivateCommand { get; set; }
+        public DefaultCommand RemoveCommand { get; set; }
 
         public ContractViewModel()
         {
@@ -94,6 +96,8 @@ namespace Skrotlog.UI.ViewModel
             AddAmountCommand = new DefaultCommand(ExecuteAddAmount, CanAddAmount);
             SearchCommand = new DefaultCommand(ExecuteSearch, CanSearch);
             UpdateCommand = new DefaultCommand(ExecuteUpdate);
+            DeactivateCommand = new DefaultCommand(ExecuteDeactivate, CanExecuteSelected);
+            RemoveCommand = new DefaultCommand(ExecuteRemove, CanExecuteSelected);
         }
 
         private void PopulateDisplayItems()
@@ -133,7 +137,7 @@ namespace Skrotlog.UI.ViewModel
 
         public bool CanAddAmount()
         {
-            return DeliveredAmount > 0 && SelectedDisplayItem != null;
+            return DeliveredAmount > 0 && CanExecuteSelected();
         }        
 
         public void ExecuteSearch()
@@ -162,11 +166,18 @@ namespace Skrotlog.UI.ViewModel
         public void ExecuteDeactivate()
         {
             bl.DeactivateContractLine(SelectedDisplayItem.ContractId, SelectedDisplayItem.ContractLineId);
+            RaisePropertyChanged("DisplayItems");
         }
 
-        public bool CanDeactivate()
+        public bool CanExecuteSelected()
         {
             return SelectedDisplayItem != null;
+        }
+
+        public void ExecuteRemove()
+        {
+            bl.RemoveContractLine(SelectedDisplayItem.ContractId, SelectedDisplayItem.ContractLineId);
+            RaisePropertyChanged("DisplayItems");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

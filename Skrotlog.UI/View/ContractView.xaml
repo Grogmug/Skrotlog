@@ -40,6 +40,8 @@
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Mængde:" VerticalAlignment="Top" Margin="5,0"/>
                 <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Margin="5,0" Height="19" Text="{Binding DeliveredAmount, UpdateSourceTrigger=PropertyChanged}"/>
                 <Button Content="Tilføj" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="55" Margin="5,0,0,0" Command="{Binding AddAmountCommand}"/>
+                <Button Content="Deaktiver" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Margin="50,0,0,0" Command="{Binding DeactivateCommand}" />
+                <Button Content="Slet" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Margin="50,0,0,0" Command="{Binding RemoveCommand}" />
             </StackPanel>
         </StackPanel>
     </Grid>

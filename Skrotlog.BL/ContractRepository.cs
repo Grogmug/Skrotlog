@@ -67,5 +67,11 @@ namespace Skrotlog.BL
             dal.DeactivateContractLine(contractLineId);
         }
 
+        public void RemoveContractLine(int contractId, int contractLineId)
+        {
+            listOfContracts.Find(x => x.Id == contractId).ContractLines.RemoveAll(x => x.Id == contractLineId);
+            dal.RemoveContractLine(contractLineId);
+        }
+
     }
 }
