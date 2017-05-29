@@ -81,7 +81,7 @@ namespace Skrotlog.UI.ViewModel
 
         public void ExecuteCreateContract()
         {
-            bl.AddContract(SelectedCustomer, DateTime.Now, SelectedCurrency, "MR");
+            bl.AddContract(SelectedCustomer, DateTime.Now, SelectedCurrency, bl.GetInitials());
             ContractId = bl.GetContracts().Last().Id;
             Information = string.Format("Kontrakten til {0} blev oprettet med kontraktnr. {1}", SelectedCustomer.Name, ContractId);
             RaisePropertyChanged("ContractId");

@@ -10,8 +10,8 @@ namespace Skrotlog.DAL
     public class SettingsReader
     {
         string path = "settings.ini";
-        string initials;
-        decimal exchangeRate;
+        string initials = "MR";
+        decimal exchangeRate = 7.5m;
 
         public string Initials
         {
@@ -26,7 +26,7 @@ namespace Skrotlog.DAL
             set
             {
                 initials = value;
-                SaveInitials(value);
+                //SaveInitials(value);
             }
         }
         public decimal ExchangeRate
@@ -35,17 +35,17 @@ namespace Skrotlog.DAL
             set
             {
                 exchangeRate = value;
-                SaveEurValue(value);
+                //SaveEurValue(value);
             }
         }
 
         public SettingsReader()
         {
-            using(StreamReader sr = new StreamReader(path))
-            {
-                Initials = sr.ReadLine();
-                ExchangeRate = decimal.Parse(sr.ReadLine());
-            }
+            //using(StreamReader sr = new StreamReader(path))
+            //{
+            //    Initials = sr.ReadLine();
+            //    ExchangeRate = decimal.Parse(sr.ReadLine());
+            //}
         }
 
         private void SaveInitials(string initials)
