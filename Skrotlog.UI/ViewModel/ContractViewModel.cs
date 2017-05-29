@@ -10,7 +10,7 @@ using Skrotlog.BL;
 
 namespace Skrotlog.UI.ViewModel
 {
-    class ContractViewModel : INotifyPropertyChanged
+    class ContractViewModel : ViewModelBase
     {
         private BLFacade bl;
         List<Contract> contracts;
@@ -39,6 +39,8 @@ namespace Skrotlog.UI.ViewModel
                 selectedDisplayItem = value;
                 RaisePropertyChanged("SelectedDisplayItem");
                 AddAmountCommand.RaiseCanExecuteChanged();
+                DeactivateCommand.RaiseCanExecuteChanged();
+                RemoveCommand.RaiseCanExecuteChanged();
             }
         }
         public int DeliveredAmount
@@ -177,15 +179,8 @@ namespace Skrotlog.UI.ViewModel
         public void ExecuteRemove()
         {
             bl.RemoveContractLine(SelectedDisplayItem.ContractId, SelectedDisplayItem.ContractLineId);
+            UpdateContractList();
             RaisePropertyChanged("DisplayItems");
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
     }
 }

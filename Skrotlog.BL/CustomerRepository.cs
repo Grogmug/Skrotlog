@@ -27,6 +27,7 @@ namespace Skrotlog.BL
         public  void AddCustomer(string name, string country)
         {
             Customer c = new Customer(name, country);
+            c.Id = dal.GetHighestCustomerId() + 1;
             listOfCustomers.Add(c);
             dal.AddCustomer(c);
         }

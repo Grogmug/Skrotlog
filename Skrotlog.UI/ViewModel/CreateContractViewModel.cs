@@ -10,7 +10,7 @@ using System.Collections.ObjectModel;
 
 namespace Skrotlog.UI.ViewModel
 {
-    class CreateContractViewModel : INotifyPropertyChanged
+    class CreateContractViewModel : ViewModelBase
     {
         private BLFacade bl;
         private List<Customer> customers;
@@ -106,14 +106,5 @@ namespace Skrotlog.UI.ViewModel
             customers = bl.GetCustomers();
             RaisePropertyChanged("Customers");
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-        }
-
     }
 }

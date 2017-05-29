@@ -60,6 +60,7 @@
     <Compile Include="ViewModel\ContractViewModel.cs" />
     <Compile Include="ViewModel\CreateContractViewModel.cs" />
     <Compile Include="ViewModel\CreateCustomerViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\ContractView.xaml.cs">
       <DependentUpon>ContractView.xaml</DependentUpon>
     </Compile>

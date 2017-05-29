@@ -9,7 +9,7 @@ using Skrotlog.Domain;
 
 namespace Skrotlog.UI.ViewModel
 {
-    public class CreateCustomerViewModel : INotifyPropertyChanged
+    public class CreateCustomerViewModel : ViewModelBase
     {
         string name = "";
         string country = "";
@@ -60,14 +60,6 @@ namespace Skrotlog.UI.ViewModel
         public bool CanCreate()
         {
             return Name != "" && Country != "";
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
     }
 }

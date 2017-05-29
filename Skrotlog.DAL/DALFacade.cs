@@ -73,9 +73,14 @@ namespace Skrotlog.DAL
             dbController.AddContractLine(contractId, contractLine);
         }
 
-        public int GetHighestId()
+        public int GetHighestContractId()
         {
-            return dbController.GetHighestId();
+            return dbController.GetHighestContractId();
+        }
+
+        public int GetHighestCustomerId()
+        {
+            return dbController.GetHighestCustomerId();
         }
 
         public void DeactivateContractLine(int contractLineId)

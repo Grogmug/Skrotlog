@@ -25,7 +25,7 @@ namespace Skrotlog.BL
         }
         public void AddContract(Customer customer, DateTime date, Currency currency, string initials)
         {
-            int newContractId = dal.GetHighestId() + 1;
+            int newContractId = dal.GetHighestContractId() + 1;
             Contract c = new Contract(newContractId ,customer, date, currency, initials);
             listOfContracts.Add(c);
             dal.AddContract(c);

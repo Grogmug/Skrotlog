@@ -12,11 +12,6 @@ namespace Skrotlog.Domain
         public string Name { get; set; }
         public string Country { get; set; }
 
-        public Customer()
-        {
-
-        }
-
         public Customer(string name, string country)
         {
             Name = name;
