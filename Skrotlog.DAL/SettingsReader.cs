@@ -9,7 +9,7 @@ namespace Skrotlog.DAL
 {
     public class SettingsReader
     {
-        string path = "settings.ini";
+        string path = AppDomain.CurrentDomain.BaseDirectory + "/settings.ini";
         string initials;
         decimal exchangeRate;
 
