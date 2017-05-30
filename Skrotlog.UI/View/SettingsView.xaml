@@ -14,7 +14,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5">
                 <TextBlock Text="EUR kurs: " />
-                <TextBox Width="40" Text="{Binding ExchangeRate, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Width="40" Text="{Binding ExchangeRate, UpdateSourceTrigger=PropertyChanged,StringFormat=N2}" />
             </StackPanel>
             <Button HorizontalAlignment="Left" Command="{Binding SaveCommand}" Width="40" Height="20" Content="Gem" Margin="58,10,0,0"/>
             <TextBlock Text="{Binding Information}" Margin="0,15,0,0"/>
