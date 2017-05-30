@@ -64,7 +64,7 @@ namespace Skrotlog.UI.ViewModel
 
         private void PopulateDisplayItems()
         {
-            displayItems = new ObservableCollection<StatContainer>(bl.ReturnMaterialAndCountryOverview(StartDate, EndDate));
+            displayItems = new ObservableCollection<StatContainer>(bl.ReturnMaterialAndCountryOverview(startDate, endDate));
         }
 
         public void ExcecuteUpdate()
