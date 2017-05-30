@@ -18,6 +18,9 @@
             <TabItem Header="Opret kunde">
                 <view:CreateCustomerView />
             </TabItem>
+            <TabItem Header="Statistik">
+                <view:StatisticsView />
+            </TabItem>
             <TabItem Header="Indstillinger">
 
             </TabItem>

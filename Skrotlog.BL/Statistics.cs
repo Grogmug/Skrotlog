@@ -129,7 +129,6 @@ namespace Skrotlog.BL
         {
 
             IEnumerable<string> countries = targetContracts.Select(x => x.Customer.Country).Distinct();
-            //List<Material> mats = targetContracts.SelectMany(x => x.ContractLines).Select(x => x.Material).Distinct().ToList();
             List<StatContainer> statcont = new List<StatContainer>();
             StatContainer sc;
 
@@ -137,18 +136,19 @@ namespace Skrotlog.BL
             {
                 foreach (Contract contract in targetContracts)
                 {
-                    if (contract.Customer.Country.Equals(countryString))
+                    if (contract.Customer.Country.ToLower().Equals(countryString.ToLower()))
                     {
                         foreach (var contractLine in contract.ContractLines)
                         {
-                            if (!statcont.Exists(x => x.Material.Type.Equals(contractLine.Material.Type)))
-                            {
-                                statcont.Add(new StatContainer(contract.Customer.Country, contractLine.Material, contractLine.DeliveredAmount));
-                            }
-                            else if ((sc = statcont.Find(x => x.Country.Equals(countryString) && x.Material.Type.Equals(contractLine.Material.Type))) != null)
+                            if ((sc = statcont.Find(x => x.Country.Equals(countryString) && x.Material.Type.Equals(contractLine.Material.Type))) != null)
                             {
                                 sc.Amount += contractLine.DeliveredAmount;
                             }
+                            else
+                            {
+                                statcont.Add(new StatContainer(contract.Customer.Country, contractLine.Material, contractLine.DeliveredAmount));
+                            }
+                            
                             
                         }
                     }

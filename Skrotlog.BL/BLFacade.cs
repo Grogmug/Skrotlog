@@ -105,6 +105,11 @@ namespace Skrotlog.BL
             return stats.ReturnSummedUpContracts(startDate, endDate, targetContracts, currency);
         }
 
+        public List<StatContainer> ReturnMaterialAndCountryOverview(DateTime startDate, DateTime endDate)
+        {
+            return stats.ReturnMaterialAndCountryOverview(startDate, endDate, this.GetContracts());
+        }
+
         public string GetInitials()
         {
             return BLFacade.Instance.GetInitials();

@@ -60,9 +60,9 @@ namespace Skrotlog.Domain
 
         public StatContainer(string country, Material material, int amount)
         {
-            this.Country = country;
-            this.Material = material;
-            this.Amount = amount;
+            this.country = country;
+            this.material = material;
+            this.amount = amount;
         }
     }
 }
