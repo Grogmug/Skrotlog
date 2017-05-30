@@ -22,7 +22,7 @@
                 <view:StatisticsView />
             </TabItem>
             <TabItem Header="Indstillinger">
-
+                <view:SettingsView />
             </TabItem>
         </TabControl>
     </Grid>
