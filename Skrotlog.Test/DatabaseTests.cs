@@ -153,5 +153,20 @@ namespace Skrotlog.Test
             Assert.AreNotEqual(1000, actualLine.TotalAmount);
             Assert.AreNotEqual(50, actualLine.DeliveredAmount);
         }
+
+        [TestMethod]
+        public void Settings_Test()
+        {
+            SettingsReader reader = new SettingsReader();
+
+            Assert.AreEqual(7.5m, reader.ExchangeRate);
+            Assert.AreEqual("JR", reader.Initials);
+
+            reader.ExchangeRate = 7.6m;
+            reader.Initials = "QR";
+
+            Assert.AreEqual(7.6m, reader.ExchangeRate);
+            Assert.AreEqual("QR", reader.Initials);
+        }
     }
 }

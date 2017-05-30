@@ -107,22 +107,22 @@ namespace Skrotlog.BL
 
         public string GetInitials()
         {
-            return BLFacade.Instance.GetInitials();
+            return DALFacade.Instance.GetInitials();
         }
 
         public void SetInitials(string initials)
         {
-            BLFacade.Instance.SetInitials(initials);
+            DALFacade.Instance.SetInitials(initials);
         }
 
         public decimal GetExchangeRate()
         {
-            return BLFacade.Instance.GetExchangeRate();
+            return DALFacade.Instance.GetExchangeRate();
         }
 
         public void SetExchangeRate(decimal exchangeRate)
         {
-            BLFacade.Instance.SetExchangeRate(exchangeRate);
+            DALFacade.Instance.SetExchangeRate(exchangeRate);
         }
 
     }

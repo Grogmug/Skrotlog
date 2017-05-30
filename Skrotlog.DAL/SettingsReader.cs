@@ -9,11 +9,9 @@ namespace Skrotlog.DAL
 {
     public class SettingsReader
     {
-        //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) == C:\Users\"Current User"\Documents\
-        //string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Skrotlog\\settings.ini";
         string path = "settings.ini";
-        string initials = "MR";
-        decimal exchangeRate = 7.5m;
+        string initials;
+        decimal exchangeRate;
 
         public string Initials
         {
@@ -24,11 +22,10 @@ namespace Skrotlog.DAL
 
                 return initials;
             }
-
             set
             {
                 initials = value;
-                //SaveInitials(value);
+                SaveValues();
             }
         }
         public decimal ExchangeRate
@@ -37,33 +34,50 @@ namespace Skrotlog.DAL
             set
             {
                 exchangeRate = value;
-                //SaveEurValue(value);
+                SaveValues();
             }
         }
 
         public SettingsReader()
         {
-            //using (StreamReader sr = new StreamReader(path))
-            //{
-            //    Initials = sr.ReadLine();
-            //    ExchangeRate = decimal.Parse(sr.ReadLine());
-            //}
+            if (!File.Exists(path))
+                CreateFile();
+
+            LoadSettings();
         }
 
-        private void SaveInitials(string initials)
-        {
-            using(StreamWriter sw = new StreamWriter(path))
-            {
-                sw.WriteLine(initials);
-            }
-        }
-
-        private void SaveEurValue(decimal eurValue)
+        private void SaveValues()
         {
             using (StreamWriter sw = new StreamWriter(path))
             {
                 sw.WriteLine(initials);
-                sw.WriteLine(eurValue);
+                sw.WriteLine(exchangeRate);
+            }
+        }
+
+        private void CreateFile()
+        {
+            using(StreamWriter sw = File.CreateText(path))
+            {
+                sw.WriteLine("JR");
+                sw.WriteLine("7,5");
+            }
+        }
+
+        private void LoadSettings()
+        {
+            using (StreamReader sr = new StreamReader(path))
+            {
+                try
+                {
+                    initials = sr.ReadLine();
+                    exchangeRate = decimal.Parse(sr.ReadLine());
+                }
+                catch (ArgumentNullException)
+                {
+                    initials = "JR";
+                    exchangeRate = 7.5m;
+                }
             }
         }
     }

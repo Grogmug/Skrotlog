@@ -19,7 +19,7 @@
                 <view:CreateCustomerView />
             </TabItem>
             <TabItem Header="Indstillinger">
-
+                <view:SettingsView />
             </TabItem>
         </TabControl>
     </Grid>
