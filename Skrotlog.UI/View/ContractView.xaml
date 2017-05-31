@@ -26,7 +26,7 @@
                     <DataGridTextColumn Header="Valuta" Binding="{Binding Currency, Mode=OneWay}" />
                     <DataGridTextColumn Header="Total Mængde" Binding="{Binding TotalAmount, Mode=OneWay}" Width="*"/>
                     <DataGridTextColumn Header="Afleveret Mængde" Binding="{Binding DeliveredAmount, Mode=OneWay}" Width="*"/>
-                    <DataGridTextColumn Header="Resterne Mængde" Binding="{Binding RemainingAmount, Mode=OneWay}" Width="*"/>
+                    <DataGridTextColumn Header="Resterende Mængde" Binding="{Binding RemainingAmount, Mode=OneWay}" Width="*"/>
                     <DataGridTextColumn Header="Bemærking" Binding="{Binding Comment, Mode=OneWay}" Width="80" />
                     <DataGridTextColumn Header="Initialer" Binding="{Binding Initials, Mode=OneWay}" />
                 </DataGrid.Columns>
