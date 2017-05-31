@@ -9,7 +9,9 @@ namespace Skrotlog.DAL
 {
     public class SettingsReader
     {
-        string path = AppDomain.CurrentDomain.BaseDirectory + "/settings.ini";
+        string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Skrotlog";
+        string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Skrotlog\\settings.ini";
+        //string path = AppDomain.CurrentDomain.BaseDirectory + "/settings.ini";
         string initials;
         decimal exchangeRate;
 
@@ -40,6 +42,10 @@ namespace Skrotlog.DAL
 
         public SettingsReader()
         {
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
             if (!File.Exists(path))
                 CreateFile();
 
