@@ -8,7 +8,6 @@ using Skrotlog.DAL;
 
 namespace Skrotlog.BL
 {
-    // sldkgljhlk
     public class BLFacade
     {
         private CustomerRepository customerRepository;
