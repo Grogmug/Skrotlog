@@ -7,6 +7,7 @@ using Skrotlog.Domain;
 
 namespace Skrotlog.DAL
 {
+    // forced commit
     public class DALFacade
     {
         DatabaseController dbController;
