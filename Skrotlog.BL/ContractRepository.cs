@@ -43,7 +43,7 @@ namespace Skrotlog.BL
             Contract selectedContract = listOfContracts.Find(x => x.Id == contractId);
             ContractLine selectedContractLine = selectedContract.ContractLines.Find(x => x.Id == contractLineId);
             selectedContractLine.DeliveredAmount += amount;
-            dal.AddAmount(contractId, contractLineId, amount);
+            dal.AddAmount(contractLineId, amount);
         }
 
         public List<Contract> GetCustomerContracts(int customerId)
