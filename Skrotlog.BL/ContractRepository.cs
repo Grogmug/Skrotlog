@@ -23,6 +23,7 @@ namespace Skrotlog.BL
             dal = DALFacade.Instance;
             listOfContracts = dal.GetContracts();
         }
+
         public void AddContract(Customer customer, DateTime date, Currency currency, string initials)
         {
             int newContractId = dal.GetHighestContractId() + 1;

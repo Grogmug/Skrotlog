@@ -43,6 +43,7 @@ namespace Skrotlog.UI.ViewModel
                 RemoveCommand.RaiseCanExecuteChanged();
             }
         }
+
         public int DeliveredAmount
         {
             get { return deliveredAmount; }
@@ -124,6 +125,7 @@ namespace Skrotlog.UI.ViewModel
                 }
             }
         }
+
         private void UpdateContractList()
         {
             contracts = bl.GetContracts();

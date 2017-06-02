@@ -30,6 +30,7 @@ namespace Skrotlog.UI.ViewModel
                 selectedCustomer = value;
             }
         }
+
         public List<Customer> Customers
         {
             get
@@ -40,7 +41,9 @@ namespace Skrotlog.UI.ViewModel
                 return customers;
             }
         }
+
         public Material SelectedMaterial { get; set; }
+
         public List<Material> Materials
         {
             get
@@ -50,11 +53,17 @@ namespace Skrotlog.UI.ViewModel
                 return materials;
             }
         }
+
         public int ContractId { get; set; }
+
         public int Amount { get; set; }
+
         public decimal Price { get; set; }
+
         public string Comment { get; set; }
+
         public Currency SelectedCurrency { get; set; }
+
         public List<Currency> Currencies
         {
             get
@@ -65,9 +74,13 @@ namespace Skrotlog.UI.ViewModel
                 return currencies;
             }
         }
+
         public string Information { get; set; }
+
         public DefaultCommand CreateContractCommand { get; set; }
+
         public DefaultCommand CreateContractLineCommand { get; set; }
+
         public DefaultCommand UpdateCustomersCommand { get; set; }
 
         public CreateContractViewModel()
@@ -83,7 +96,8 @@ namespace Skrotlog.UI.ViewModel
         {
             bl.AddContract(SelectedCustomer, DateTime.Now, SelectedCurrency, bl.GetInitials());
             ContractId = bl.GetContracts().Last().Id;
-            Information = string.Format("Kontrakten til {0} blev oprettet med kontraktnr. {1}", SelectedCustomer.Name, ContractId);
+            Information = string.Format("Kontrakten til {0} blev oprettet med kontraktnr. {1}", 
+                SelectedCustomer.Name, ContractId);
             RaisePropertyChanged("ContractId");
             RaisePropertyChanged("Information");
         }
@@ -93,9 +107,11 @@ namespace Skrotlog.UI.ViewModel
             bl.AddContractLine(ContractId, SelectedMaterial, Price, Amount, Comment);
             Amount = 0;
             Price = 0;
-            Information = string.Format("Kontraktlinjen med materialet {0}, til kontraktnr. {1} blev oprettet.", SelectedMaterial.Type, ContractId);
+            Information = string.Format("Kontraktlinjen med materialet {0}, til kontraktnr. {1} blev oprettet.", 
+                SelectedMaterial.Type, ContractId);
             RaisePropertyChanged("Information");
         }
+
         public bool CanCreateContractLine()
         {
             return true;
